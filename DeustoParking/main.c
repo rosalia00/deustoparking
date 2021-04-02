@@ -1,10 +1,6 @@
-/*
- * main.c
- *
- *  Created on: 28 mar. 2021
- *      Author: rosal
- */
+#inlcude <studio.h>
 
-/*
-PRUEBA
-*/
+int main(void) {
+
+	return 0;
+}
