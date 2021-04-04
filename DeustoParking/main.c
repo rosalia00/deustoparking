@@ -9,3 +9,4 @@ int main(void) {
 /*para llamar a la funcion
  *
  * ticket(&reverva_t)
+*/

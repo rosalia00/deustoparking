@@ -25,11 +25,11 @@ void reservar() {
 
 	printf("PLAZA: ");
 	fflush(stdout);
-	scanf("%c", plaza);
+	scanf("%c%*c", plaza);
 
 	printf("HORA INICIO: ");
 	fflush(stdout);
-	scanf("%i", &horaI);
+	scanf("%c%*c", &horaI);
 
 	printf("HORA FINAL: ");
 	fflush(stdout);
@@ -84,16 +84,16 @@ void escribir(char *matricula, char *plaza, int horaI, int horaF, int fid,
 		printf("Error abriendo archivo %s", "reserva.txt");
 	}
 
-	fprintf(f, "%c", *matricula);
-	fprintf(f, "%c", *plaza);
-	fprintf(f, "%i", horaI);
-	fprintf(f, "%i", horaF);
-	fprintf(f, "%i", fid);
-	fprintf(f, "%i", fim);
-	fprintf(f, "%i", fia);
-	fprintf(f, "%i", ffd);
-	fprintf(f, "%i", ffm);
-	fprintf(f, "%i", ffa);
+	fprintf(f, "MATRICULA: %c;", *matricula);
+	fprintf(f, "PLAZA: %c;", *plaza);
+	fprintf(f, "HORA INICIO: %i;", horaI);
+	fprintf(f, "HORA FINAL: %i;", horaF);
+	fprintf(f, "INICIO: %i-", fid);
+	fprintf(f, "%i-", fim);
+	fprintf(f, "%i;", fia);
+	fprintf(f, "FINAL: %i-", ffd);
+	fprintf(f, "%i-", ffm);
+	fprintf(f, "%i.\n", ffa);
 
 	fclose(f);
 }
