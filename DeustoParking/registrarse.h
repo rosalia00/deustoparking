@@ -9,9 +9,9 @@
 #define REGISTRARSE_H_
 
 typedef struct {
-	char *nombre[];
-	char *apellido[];
-	char *dni[];
+	char *nombre;
+	char *apellido;
+	char *dni;
 	int telefono;
 	int numTarj;
 	int contrasenya;
