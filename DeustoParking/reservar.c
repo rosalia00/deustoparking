@@ -29,7 +29,7 @@ void reservar() {
 
 	printf("HORA INICIO: ");
 	fflush(stdout);
-	scanf("%c%*c", &horaI);
+	scanf("%i", &horaI);
 
 	printf("HORA FINAL: ");
 	fflush(stdout);
