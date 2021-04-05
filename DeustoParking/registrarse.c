@@ -1,6 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "registrarse.h"
+
+char* quitadorContrabarraN(char *s) {
+	char *n = malloc(strlen(s ? s : "\n"));
+	if (s) {
+		strcpy(n, s);
+	}
+	n[strlen(n) - 1] = '\0';
+	return n;
+}
 
 void registrarse() {
 
@@ -17,10 +27,13 @@ void registrarse() {
 	printf("Insertar Nombre: ");
 	fflush(stdout);
 	fgets(nombre, 20, stdin);
+	nombre = quitadorContrabarraN(nombre);
+	printf("%s", nombre);
 
 	printf("Insertar Apellido: ");
 	fflush(stdout);
 	fgets(apellido, 20, stdin);
+	apellido = quitadorContrabarraN(apellido);
 
 	printf("Insertar DNI: ");
 	fflush(stdout);

@@ -11,5 +11,6 @@ typedef struct {
 } Usuario;
 
 void registrarse();
+char* quitadorContrabarraN(char *s);
 
 #endif
