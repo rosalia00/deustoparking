@@ -22,7 +22,7 @@ Reserva reservacion() {
 
 	printf("MATRICULA: ");
 	fflush(stdout);
-	scanf("%c%*c", matricula);
+	fgets(matricula, 20, stdin);
 
 	printf("PLAZA: ");
 	fflush(stdout);

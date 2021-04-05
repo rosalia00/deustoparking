@@ -17,17 +17,14 @@ void registrarse() {
 	printf("Insertar Nombre: ");
 	fflush(stdout);
 	fgets(nombre, 20, stdin);
-	printf("%s", nombre);
 
 	printf("Insertar Apellido: ");
 	fflush(stdout);
 	fgets(apellido, 20, stdin);
-	printf("%s", apellido);
 
 	printf("Insertar DNI: ");
 	fflush(stdout);
 	fgets(dni, 10, stdin);
-	printf("%s", dni);
 
 	printf("Insertar Nº Telefono: ");
 	fflush(stdout);
