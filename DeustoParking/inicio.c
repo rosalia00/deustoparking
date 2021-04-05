@@ -1,19 +1,45 @@
 #include <stdio.h>
 #include "registrarse.h"
+#include "login.h"
+#include <stdlib.h>
 
-void inicio(void){
-	printf("BIENVENIDO A DEUSTOPARKING \n ELIGE UNA OPCION: \n 1. INICIAR SESION \n "
-			"2. REGISTRARSE \n INSERTE NUMERO: "); fflush(stdout);
+void cleanStdIn(char *str, int max_line) {
+	if ((strlen(str) == max_line - 1) && (str[max_line - 2] != '\n'))
+		while (getchar() != '\n')
+			;
+}
+
+void inicio() {
+    printf(" == BIENVENIDO A DEUSTOPARKING == \n");
+    printf("\n");
+    printf("r -> Registrarse.\n");
+    printf("i -> Iniciar sesion.\n");
+    printf("\n");
+    printf("INTRODUZCA LA LETRA: ");
+
+	fflush(stdout);
 
 	do {
-		char c = getchar();
-		if (c == '1'){
-			printf("hola");
-		} else if (c == '2') {
+		char letra;
+		char linea[5];
+		cleanStdIn(linea, 5);
+		fgets(linea, 5, stdin);
+		sscanf(linea, "%c", &letra);
+		letra = tolower(letra);
+
+		if (letra == 'i') {
+			loggearse(); //llamamos al método
+		} else if (letra == 'r') {
 			registrarse();
 		} else {
-			printf("CARACTER INVALIDO INSERTE UNO NUEVO: ");fflush(stdout);
-			c = getchar();
+			printf("LETRA INVALIDA INSERTE UNO NUEVO: ");
+			fflush(stdout);
+
+			char linea[5];
+			cleanStdIn(linea, 5);
+			fgets(linea, 5, stdin);
+			sscanf(linea, "%c", &letra);
+			letra = tolower(letra);
 		}
 	} while (0);
 

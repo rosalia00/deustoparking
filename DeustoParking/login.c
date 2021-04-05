@@ -9,13 +9,13 @@ void loggearse() {
 
 	int contrasenya;//en los ints NO hacemos malloc xd
 
-	printf("Introduzca su DNI");
+	printf("\nIntroduzca su DNI: ");
 	fflush(stdout);
 	fgets(dni, 10, stdin);
 
 	dni = quitadorContrabarraN(dni); //le pasamos dni para quitarle contrabarra a dni :$ Y SOLO CON CHARS
 
-	printf("Introduzca su contraseña:");
+	printf("Introduzca su contrasenya: ");
 	fflush(stdout);
 	scanf("%i", &contrasenya); //el % identifica el TIPO pq c es retra | &usamos para acceder dentro de valor int
 

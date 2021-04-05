@@ -3,7 +3,7 @@
 #include "login.h"
 
 int main(void) {
-	loggearse();
+	inicio();
 	return 0;
 }
 /*para llamar a la funcion
