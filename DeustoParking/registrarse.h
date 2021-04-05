@@ -1,4 +1,3 @@
-
 #ifndef REGISTRARSE_H_
 #define REGISTRARSE_H_
 
@@ -11,6 +10,6 @@ typedef struct {
 	int contrasenya;
 } Usuario;
 
-void registrarse (void);
+void registrarse();
 
-#endif /* REGISTRARSE_H_ */
+#endif

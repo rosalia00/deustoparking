@@ -1,4 +1,5 @@
 #include "inicio.h"
+#include "registrarse.h"
 
 int main(void) {
 	registrarse();
