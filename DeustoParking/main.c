@@ -1,11 +1,9 @@
 #include "inicio.h"
 
 int main(void) {
-	inicio();
+	registrarse();
 	return 0;
 }
-//hola
-
 
 /*para llamar a la funcion
  *

@@ -1,9 +1,3 @@
-/*
- * registrarse.h
- *
- *  Created on: 02/04/2021
- *      Author: evaho
- */
 
 #ifndef REGISTRARSE_H_
 #define REGISTRARSE_H_
@@ -15,7 +9,7 @@ typedef struct {
 	int telefono;
 	int numTarj;
 	int contrasenya;
-} Persona;
+} Usuario;
 
 void registrarse (void);
 
