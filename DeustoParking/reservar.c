@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "reserva.h"
+#include "registrarse.h"
 #include <string.h>
 
 Reserva reservacion() {
@@ -23,6 +24,7 @@ Reserva reservacion() {
 	printf("MATRICULA: ");
 	fflush(stdout);
 	fgets(matricula, 20, stdin);
+	matricula = quitadorContrabarraN(matricula);
 
 	printf("PLAZA: ");
 	fflush(stdout);
@@ -57,12 +59,11 @@ Reserva reservacion() {
 	itoa(fim, datain2, 10);
 	itoa(fia, datain3, 10);
 
-	strcat(datainFinal, datain1);
-	printf("%s", datainFinal);
+	strcpy(datainFinal, datain1);
+	strcat(datainFinal, "-");
 	strcat(datainFinal, datain2);
-	//printf("%s", datainFinal);
+	strcat(datainFinal, "-");
 	strcat(datainFinal, datain3);
-	//printf("%s", datainFinal);
 
 	printf("FECHA FIN DIA: ");
 	fflush(stdout);
@@ -76,16 +77,23 @@ Reserva reservacion() {
 	fflush(stdout);
 	scanf("%i", &ffa);
 
-	char datafin1[2];
-	char datafin2[2];
-	char datafin3[4];
+	char datafinFinal[11];
+	char datafin1[3];
+	char datafin2[3];
+	char datafin3[5];
 
 	itoa(ffd, datafin1, 10);
 	itoa(ffm, datafin2, 10);
 	itoa(ffa, datafin3, 10);
 
+	strcpy(datafinFinal, datafin1);
+	strcat(datafinFinal, "-");
+	strcat(datafinFinal, datafin2);
+	strcat(datafinFinal, "-");
+	strcat(datafinFinal, datafin3);
+
 	res.apellido = "apellido";
-	res.datafin = datainFinal;
+	res.datafin = datafinFinal;
 	res.datainicio = datainFinal;
 	res.dni = "dni";
 	res.matricula = matricula;
