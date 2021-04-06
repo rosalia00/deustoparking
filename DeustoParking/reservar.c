@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "reserva.h"
 #include "registrarse.h"
+#include "tipoBono.h"
 #include <string.h>
 
 Reserva reservacion() {
@@ -82,6 +83,7 @@ Reserva reservacion() {
 	char datafin2[3];
 	char datafin3[5];
 
+
 	itoa(ffd, datafin1, 10);
 	itoa(ffm, datafin2, 10);
 	itoa(ffa, datafin3, 10);
@@ -99,7 +101,7 @@ Reserva reservacion() {
 	res.matricula = matricula;
 	res.nombre = "nombre";
 	res.plaza = plaza;
-	res.precio = 12;
+	res.precio = tipoBono();
 	res.tarjeta = 123;
 
 	printf("\n");
