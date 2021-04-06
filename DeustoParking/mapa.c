@@ -35,12 +35,11 @@ void mapa(Reserva arRsv[]){
 	do{
 		j = 0;
 		do {
-			printf("hola "); fflush(stdout);
 			if(map[k][j] == '[' && map[k][j+2] == ']'){
 				printf("%c",map[k][j+1]); fflush(stdout);
-				numChar = numPlaza+'0';
+				numChar = numPlaza+'0'; //el numero de la plaza pasado a char
 				printf("%c", numChar); fflush(stdout);
-				map[k][j+1] = 'a';
+				map[k][j+1] = numChar; //esto no funciona
 				printf(" hey "); fflush(stdout);
 				numPlaza++;
 				j++;
@@ -50,7 +49,6 @@ void mapa(Reserva arRsv[]){
 		} while(map[k][j] != '\0');
 
 		k++;
-		printf("%i", k);  fflush(stdout);
 	} while(k<tamanyoMapa);
 
 }
