@@ -2,6 +2,7 @@
 #include "registrarse.h"
 #include "login.h"
 #include "reserva.h"
+#include "mapa.h"
 
 int main(void) {
 	//inicio();
