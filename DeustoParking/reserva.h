@@ -16,6 +16,8 @@ typedef struct {
 
 Reserva reservacion();
 
+float tipoBono;
+
 void ticket(Reserva *res);
 void imprimidorArray(char cadena[]);
 
