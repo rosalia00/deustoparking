@@ -4,6 +4,7 @@
 
 int main(void) {
 	inicio();
+	printf("");
 	return 0;
 }
 /*para llamar a la funcion

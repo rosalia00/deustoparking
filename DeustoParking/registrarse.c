@@ -28,7 +28,6 @@ void registrarse() {
 	fflush(stdout);
 	fgets(nombre, 20, stdin);
 	nombre = quitadorContrabarraN(nombre);
-	printf("%s", nombre);
 
 	printf("Insertar Apellido: ");
 	fflush(stdout);
