@@ -33,6 +33,7 @@ float tipoBono(){
 		break;
 	default:
 		printf("\n Opcion Erronea. Debe elegir entre 1 - 6. Pulse una tecla para continuar... \n");
+		//limpia teclado
 		fflush(stdin);
 		c = getch();
 		break;
