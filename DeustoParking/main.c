@@ -3,11 +3,13 @@
 #include "login.h"
 #include "reserva.h"
 #include "mapa.h"
+#include "inicioUsuario.h"
 
 int main(void) {
-	//inicio();
-	Reserva reserv[1];
-	mapa(reserv);
+//	//inicio();
+//	Reserva reserv[1];
+//	mapa(reserv);
+	inicioUsuario();
 	return 0;
 }
 /*para llamar a la funcion
