@@ -21,14 +21,17 @@ float tipoBono(){
 		{
 	case 1:
 		tipoBono = 62.99;
+		reservacion();
 		return tipoBono;
 		break;
 	case 2:
 		tipoBono = 75.59;
+		reservacion();
 		return tipoBono;
 		break;
 	case 3:
 		tipoBono = 62,99;
+		reservacion();
 		return tipoBono;
 		break;
 	default:

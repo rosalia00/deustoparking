@@ -9,7 +9,8 @@ int main(void) {
 //	//inicio();
 //	Reserva reserv[1];
 //	mapa(reserv);
-	inicioUsuario();
+//	inicioUsuario();
+	tipoBono();
 	return 0;
 }
 /*para llamar a la funcion
