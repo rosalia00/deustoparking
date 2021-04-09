@@ -46,17 +46,17 @@ void crearMapa(int piso){
 		primeraPlaza++;
 	}
 
-	printf("  ==========================\n");
-	printf("// [%i][%i][%i][%i][%i][%i] \\\\ \n", arNum[0], arNum[1], arNum[2], arNum[3], arNum[4], arNum[5]);
-	printf("||                          ||\n");
-	printf("|| [%i][%i][%i][%i][%i][%i] ||\n", arNum[6], arNum[7], arNum[8], arNum[9], arNum[10], arNum[11]);
-	printf("|| [%i][%i][%i][%i][%i][%i] ||\n", arNum[12], arNum[13], arNum[14], arNum[15], arNum[16], arNum[17]);
-	printf("||                          ||\n");
-	printf("|| [%i][%i][%i][%i][%i][%i] ||\n", arNum[18], arNum[19], arNum[20], arNum[21], arNum[22], arNum[23]);
-	printf("|| [%i][%i][%i][%i][%i][%i] ||\n", arNum[24], arNum[25], arNum[26], arNum[27], arNum[28], arNum[29]);
-	printf("||                          ||\n");
-	printf("\\\\ [%i][%i][%i][%i][%i][%i] //\n", arNum[30], arNum[31], arNum[32], arNum[33], arNum[34], arNum[35]);
-	printf("  ==========================\n");
+	printf("  ==============================\n");
+	printf("//   [%i][%i][%i][%i][%i][%i]   \\\\ \n", arNum[0], arNum[1], arNum[2], arNum[3], arNum[4], arNum[5]);
+	printf("||                              ||\n");
+	printf("||   [%i][%i][%i][%i][%i][%i]   ||\n", arNum[6], arNum[7], arNum[8], arNum[9], arNum[10], arNum[11]);
+	printf("||   [%i][%i][%i][%i][%i][%i]   ||\n", arNum[12], arNum[13], arNum[14], arNum[15], arNum[16], arNum[17]);
+	printf("||                              ||\n");
+	printf("||   [%i][%i][%i][%i][%i][%i]   ||\n", arNum[18], arNum[19], arNum[20], arNum[21], arNum[22], arNum[23]);
+	printf("||   [%i][%i][%i][%i][%i][%i]   ||\n", arNum[24], arNum[25], arNum[26], arNum[27], arNum[28], arNum[29]);
+	printf("||                              ||\n");
+	printf("\\\\   [%i][%i][%i][%i][%i][%i]   //\n", arNum[30], arNum[31], arNum[32], arNum[33], arNum[34], arNum[35]);
+	printf("  ==============================\n");
 	fflush(stdout);
 }
 
