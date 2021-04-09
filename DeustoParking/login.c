@@ -5,7 +5,7 @@
 
 void loggearse() {
 	char *dni; //Cuando pongamos * usamos malloc :) 10/10
-	dni = malloc(10 * sizeof (char)); //reservamos 9 huekitos, ponerlo cuando lo stateemos
+	dni = (char*)malloc(10 * sizeof (char)); //reservamos 9 huekitos, ponerlo cuando lo stateemos
 
 	int contrasenya;//en los ints NO hacemos malloc xd
 
@@ -22,3 +22,4 @@ void loggearse() {
 	printf("%s", dni);
 	printf("%i", contrasenya);
 }
+

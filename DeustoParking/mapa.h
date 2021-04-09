@@ -4,5 +4,6 @@
 
 void mapa(Reserva arRsv[]);
 char cambiador(char cosos[], char cosoacambiar);
+void imprimirMapa(char **mapa, int tamanyoMapa);
 
 #endif /* MAPA_H_ */

@@ -4,12 +4,15 @@
 #include "registrarse.h"
 #include "tipoBono.h"
 #include <string.h>
+#include <conio.h>
+#include "inicio.h"
+#include <windows.h>
 
 Reserva reservacion() {
 
 	Reserva res;
 
-	char *matricula = malloc(7 * sizeof(char));
+	char *matricula = (char*)malloc(7 * sizeof(char));
 	int plaza = 0;
 	int horaI = 0;
 	int horaF = 0;
@@ -21,10 +24,12 @@ Reserva reservacion() {
 	int ffa = 0;
 
 	int eleccion;
+	int c;
 
 	printf("MATRICULA: ");
 	fflush(stdout);
-	fgets(matricula, 20, stdin);
+	//fgets(matricula, 20, stdin);
+	scanf("%s", matricula);
 	matricula = quitadorContrabarraN(matricula);
 
 	printf("PLAZA: ");
@@ -103,22 +108,47 @@ Reserva reservacion() {
 	res.plaza = plaza;
 	res.precio = tipoBono();
 	res.tarjeta = 123;
-
+	system("cls");
+	do {
 	printf("\n");
-	printf("1. Finalizar.\n2. Cancelar.\n");
+	printf("\n 1. Imprimir ticket. \n 2. Volver a inicio. \n");
+	printf("\n Elija opcion:  ");
 	fflush(stdout);
 	scanf("%i", &eleccion);
+	switch (eleccion)
+	{
+		case 1:
+			ticket(&res);
+			printf("\n Pulse una tecla para volver al menu principal");
+			fflush(stdin);
+			c = getch();
+			inicio();
+			break;
+		case 2:
+			fflush(stdin);
+			inicio();
+			break;
+		defalut:
+			printf("CARACTER INVALIDO. INSERTE UNO NUEVO: ");
+			fflush(stdin);
+			c = getch();
+			break;
+		}
+	} while (eleccion <=0 || eleccion >=3);
 
+	/*
 	if (eleccion == 1) {
 		//escribir(matricula, plaza, horaI, horaF, fid, fim, fia, ffd, ffm, ffa);
 		ticket(&res);
+
 	} else if (eleccion == 2) {
-		printf("SALIR");
+		inicio();
 	} else {
 		printf("CARACTER INVALIDO INSERTE UNO NUEVO: ");
 		fflush(stdout);
 		scanf("%i", &eleccion);
 	}
-
+	*/
 	return res;
 }
+

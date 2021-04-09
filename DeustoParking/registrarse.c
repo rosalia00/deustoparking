@@ -4,7 +4,8 @@
 #include "registrarse.h"
 
 char* quitadorContrabarraN(char *s) {
-	char *n = malloc(strlen(s ? s : "\n"));
+	char *n;
+	n = (char*)malloc(strlen(s ? s : "\n"));
 	if (s) {
 		strcpy(n, s);
 	}
@@ -14,9 +15,12 @@ char* quitadorContrabarraN(char *s) {
 
 void registrarse() {
 
-	char *nombre = malloc(20 * sizeof(char));
-	char *apellido = malloc(20 * sizeof(char));
-	char *dni = malloc(9 * sizeof(char));
+	char *nombre;
+	nombre = (char *)malloc(20 * sizeof(char));
+	char *apellido;
+	apellido = (char*)malloc(20 * sizeof(char));
+	char *dni;
+	dni = (char*)malloc(9 * sizeof(char));
 	int telefono = 0;
 	int numTarj = 0;
 	int contrasenya = 0;
@@ -38,15 +42,15 @@ void registrarse() {
 	fflush(stdout);
 	fgets(dni, 10, stdin);
 
-	printf("Insertar Nº Telefono: ");
+	printf("Insertar Telefono: ");
 	fflush(stdout);
 	scanf("%i", &telefono);
 
-	printf("Insertar Nº Tarjeta: ");
+	printf("Insertar Tarjeta: ");
 	fflush(stdout);
 	scanf("%i", &numTarj);
 
-	printf("Insertar Contraseña Numerica: ");
+	printf("Insertar Contrasenya Numerica: ");
 	fflush(stdout);
 	scanf("%i", &contrasenya);
 }
