@@ -7,9 +7,9 @@
 
 
 int main(void) {
-	inicio();
+	//inicio();
 	Reserva reserv[1];
-	//mapa(reserv);
+	mapa(reserv);
 	inicioUsuario();
 	//tipoBono();
 	return 0;

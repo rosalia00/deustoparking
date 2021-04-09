@@ -30,9 +30,40 @@ void imprimirMapa(char **mapa, int tamanyoMapa){
 	}
 }
 
-void inicioMapa (char letra, int piso){
+void crearMapa(int piso){
+	int primeraPlaza;
+	if(piso == 1){
+		primeraPlaza = 1;
+	} else if (piso == 2){
+		primeraPlaza = 37;
+	} else if (piso == 3){
+		primeraPlaza = 73;
+	}
+	int arNum[36];
+	int w;
+	for (w = 0; w < 36; ++w) {
+		arNum[w] = primeraPlaza;
+		primeraPlaza++;
+	}
+
+	printf("  ==========================\n");
+	printf("// [%i][%i][%i][%i][%i][%i] \\\\ \n", arNum[0], arNum[1], arNum[2], arNum[3], arNum[4], arNum[5]);
+	printf("||                          ||\n");
+	printf("|| [%i][%i][%i][%i][%i][%i] ||\n", arNum[6], arNum[7], arNum[8], arNum[9], arNum[10], arNum[11]);
+	printf("|| [%i][%i][%i][%i][%i][%i] ||\n", arNum[12], arNum[13], arNum[14], arNum[15], arNum[16], arNum[17]);
+	printf("||                          ||\n");
+	printf("|| [%i][%i][%i][%i][%i][%i] ||\n", arNum[18], arNum[19], arNum[20], arNum[21], arNum[22], arNum[23]);
+	printf("|| [%i][%i][%i][%i][%i][%i] ||\n", arNum[24], arNum[25], arNum[26], arNum[27], arNum[28], arNum[29]);
+	printf("||                          ||\n");
+	printf("\\\\ [%i][%i][%i][%i][%i][%i] //\n", arNum[30], arNum[31], arNum[32], arNum[33], arNum[34], arNum[35]);
+	printf("  ==========================\n");
+	fflush(stdout);
+}
+
+void inicioMapa (char letra, int piso, char **map, int tamanyoMapa){
 	if(letra =='a' && piso!= 3){
 		piso++;
+		crearMapa(piso);
 		printf("\nESTA USTED EN EL PISO %i, SELECCIONE UNA LETRA: ", piso); fflush(stdout);
 		char letra;
 		char linea[5];
@@ -40,8 +71,10 @@ void inicioMapa (char letra, int piso){
 		fgets(linea, 5, stdin);
 		sscanf(linea, "%c", &letra);
 		letra = tolower(letra);
+		inicioMapa(letra, piso, map, tamanyoMapa);
 	} else if (letra == 'b' && piso != 1){
 		piso--;
+		crearMapa(piso);
 		printf("\nESTA USTED EN EL PISO %i, SELECCIONE UNA LETRA: ", piso); fflush(stdout);
 		char letra;
 		char linea[5];
@@ -49,7 +82,7 @@ void inicioMapa (char letra, int piso){
 		fgets(linea, 5, stdin);
 		sscanf(linea, "%c", &letra);
 		letra = tolower(letra);
-		printf("\nESTA USTED EN EL PISO %i, SELECCIONE UNA LETRA: ", piso); fflush(stdout);
+		inicioMapa(letra, piso, map, tamanyoMapa);
 	} else if (letra =='a' && piso== 3){
 		printf("Esta usted en la ultima planta, seleccione otra letra por favor");
 		printf("\nESTA USTED EN EL PISO %i, SELECCIONE UNA LETRA: ", piso); fflush(stdout);
@@ -59,7 +92,7 @@ void inicioMapa (char letra, int piso){
 		fgets(linea, 5, stdin);
 		sscanf(linea, "%c", &letra);
 		letra = tolower(letra);
-
+		inicioMapa(letra, piso, map, tamanyoMapa);
 	}  else if (letra =='b' && piso== 1){
 		printf("Esta usted en la primera planta, seleccione otra letra por favor");
 		printf("\nESTA USTED EN EL PISO %i, SELECCIONE UNA LETRA: ", piso); fflush(stdout);
@@ -69,6 +102,7 @@ void inicioMapa (char letra, int piso){
 		fgets(linea, 5, stdin);
 		sscanf(linea, "%c", &letra);
 		letra = tolower(letra);
+		inicioMapa(letra, piso, map, tamanyoMapa);
 	} else if (letra == 'v'){
 		inicioUsuario();
 	} else {
@@ -80,6 +114,7 @@ void inicioMapa (char letra, int piso){
 		sscanf(linea, "%c", &letra);
 		letra = tolower(letra);
 		printf("\nESTA USTED EN EL PISO %i, SELECCIONE UNA LETRA: ", piso); fflush(stdout);
+		inicioMapa(letra, piso, map, tamanyoMapa);
 	}
 }
 
@@ -87,11 +122,13 @@ void mapa(Reserva arRsv[]) {
 
 	char **map = malloc(30 * sizeof(char*));
 	int tamanyoMapa = 11;
-
-	int piso = 1;
+	int h;
+	for(h=0;h<tamanyoMapa;h++){
+	 map[h]=(char*)malloc(50*sizeof(char));
+	}
 
 	map[0] = "  ===================\n";
-	map[1] = "// [b][ ][ ][ ][ ][ ] \\\\ \n";
+	map[1] = "// [ ][ ][ ][ ][ ][ ] \\\\ \n";
 	map[2] = "||                    ||\n";
 	map[3] = "|| [ ][ ][ ][ ][ ][ ] ||\n";
 	map[4] = "|| [ ][ ][ ][ ][ ][ ] ||\n";
@@ -102,26 +139,22 @@ void mapa(Reserva arRsv[]) {
 	map[9] = "\\\\ [ ][ ][ ][ ][ ][ ] //\n";
 	map[10] = "  ===================\n";
 
-	imprimirMapa(map, tamanyoMapa);
-
+	int piso = 1;
+	crearMapa(piso);
 	printf("a -> Subir\n");
 	printf("b -> Bajar\n");
 	printf("v -> Volver\n"); fflush(stdout);
 	printf("\nESTA USTED EN EL PISO %i, SELECCIONE UNA LETRA: ", piso); fflush(stdout);
 
+	char letra;
+	char linea[5];
+	cleanStdIn(linea, 5);
+	fgets(linea, 5, stdin);
+	sscanf(linea, "%c", &letra);
+	letra = tolower(letra);
 
-	do {
-		char letra;
-		char linea[5];
-		cleanStdIn(linea, 5);
-		fgets(linea, 5, stdin);
-		sscanf(linea, "%c", &letra);
-		letra = tolower(letra);
+	inicioMapa(letra, piso, map, tamanyoMapa);
 
-
-
-	}while(0);
-/*
 	int tamanyoReserva = sizeof(arRsv) / sizeof *arRsv;
 	int plazas[tamanyoReserva];
 
@@ -129,29 +162,21 @@ void mapa(Reserva arRsv[]) {
 	for (var = 0; var < tamanyoReserva; ++var) {
 		plazas[var] = arRsv[var].plaza;
 	}
-	int numPlaza = 1;
 
+	/*
 	int k = 0;
 	int j;
 	char numChar;
-	char *cambiar;
 	do {
 		j = 0;
 		do {
 			if (map[k][j] == '[' && map[k][j + 2] == ']') {
-				//printf("%c", map[k][j + 1]); fflush(stdout);
-
-				numChar = numPlaza + '0';
 				//itoa(numPlaza, numChar, 10);
 				//printf("%c", numChar); fflush(stdout);
 				//printf("\n\n", cambiador(map[k], numChar));
-				//printf("%c", map[k][j + 1]);
-				//map[k][j + 1] = numChar; //esto no funciona
-				//printf(" hey "); fflush(stdout);
-				cambiar = map[k];
-				printf("%s", cambiar); fflush(stdout);
-				cambiar[j+1] = 'a';
-				printf("hey"); fflush(stdout);
+				printf("%c", map[k][j + 1]);  fflush(stdout);
+				map[k][j + 1] = numChar; //esto no funciona
+				printf(" hey "); fflush(stdout);
 				numPlaza++;
 				j++;
 			} else {
@@ -162,5 +187,5 @@ void mapa(Reserva arRsv[]) {
 		k++;
 	} while (k < tamanyoMapa);
 
-*/
+	*/
 }
