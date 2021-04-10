@@ -6,15 +6,14 @@
 #include "tipoBono.h"
 
 void inicioUsuario() {
-    char letra;
+	char letra;
 	printf(" == BIENVENIDO == \n");
-    printf("\n");
-    printf("p -> Reservar plazas.\n");
-    printf("m -> Mapa.\n");
-    printf("r -> Reservas.\n");
-    printf("\n");
-    printf("INTRODUZCA LA LETRA: ");
-
+	printf("\n");
+	printf("p -> Reservar plazas.\n");
+	printf("m -> Mapa.\n");
+	printf("r -> Reservas.\n");
+	printf("\n");
+	printf("INTRODUZCA LA LETRA: ");
 
 	fflush(stdout);
 
@@ -30,9 +29,9 @@ void inicioUsuario() {
 		if (letra == 'p') {
 			reservacion(); //llamamos al m�todo
 		} else if (letra == 'm') {
-		//	mapa();
+			//	mapa();
 		} else if (letra == 'r') {
-					//dejamos vacío pq falta bbdd :(
+			//dejamos vacío pq falta bbdd :(
 		} else {
 			printf("LETRA INVALIDA INSERTE UNO NUEVO: ");
 			fflush(stdout);

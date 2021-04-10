@@ -17,13 +17,13 @@ void inicio() {
 	bool valido = true;
 	system("cls");
 	fflush(stdout);
-    printf("\n == BIENVENIDO A DEUSTOPARKING == \n");
-    printf("\n");
-    printf("r -> Registrarse.\n");
-    printf("i -> Iniciar sesion.\n");
-    printf("s -> Salir del programa. \n");
-    printf("\n");
-    printf("INTRODUZCA LA LETRA: ");
+	printf("\n == BIENVENIDO A DEUSTOPARKING == \n");
+	printf("\n");
+	printf("r -> Registrarse.\n");
+	printf("i -> Iniciar sesion.\n");
+	printf("s -> Salir del programa. \n");
+	printf("\n");
+	printf("INTRODUZCA LA LETRA: ");
 
 	fflush(stdout);
 
@@ -35,42 +35,41 @@ void inicio() {
 		fgets(linea, 5, stdin);
 		sscanf(linea, "%c", &letra);
 		letra = tolower(letra);
-		switch (letra)
-			{
-			case  'i':
-				loggearse();
-				valido = false;
-				break;
-			case 'r':
-				registrarse();
-				valido = false;
-				break;
-			case 's':
-				printf("\n Saliendo del programa en 3 segundos...");
-				Sleep(3000);
-				exit(1);
-			default:
-				printf("\nLETRA INVALIDA INSERTE UNO NUEVO: ");
-				fflush(stdout);
-				sscanf(linea, "%c", &letra);
-				letra = tolower(letra);
-				valido = true;
-				break;
-			}
-		/*
-		if (letra == 'i') {
-			loggearse(); //llamamos al método
-		} else if (letra == 'r') {
+		switch (letra) {
+		case 'i':
+			loggearse();
+			valido = false;
+			break;
+		case 'r':
 			registrarse();
-		} else {
-			printf("\n LETRA INVALIDA INSERTE UNO NUEVO: ");
+			valido = false;
+			break;
+		case 's':
+			printf("\n Saliendo del programa en 3 segundos...");
+			Sleep(3000);
+			exit(1);
+		default:
+			printf("\nLETRA INVALIDA INSERTE UNO NUEVO: ");
 			fflush(stdout);
-			char linea[5];
-			cleanStdIn(linea, 5);
-			fgets(linea, 5, stdin);
 			sscanf(linea, "%c", &letra);
 			letra = tolower(letra);
-		} */
+			valido = true;
+			break;
+		}
+		/*
+		 if (letra == 'i') {
+		 loggearse(); //llamamos al método
+		 } else if (letra == 'r') {
+		 registrarse();
+		 } else {
+		 printf("\n LETRA INVALIDA INSERTE UNO NUEVO: ");
+		 fflush(stdout);
+		 char linea[5];
+		 cleanStdIn(linea, 5);
+		 fgets(linea, 5, stdin);
+		 sscanf(linea, "%c", &letra);
+		 letra = tolower(letra);
+		 } */
 	} while (valido);
 	system("cls");
 
