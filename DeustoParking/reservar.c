@@ -105,21 +105,20 @@ Reserva reservacion(Usuario u) {
 	res.nombre = u.nombre;
 	res.plaza = plaza;
 	res.precio = tipoBono();
+	fflush(stdin);
 	res.tarjeta = u.numTarj;
 	system("cls");
 	do {
-		printf("\n");
 		printf("\n1. Imprimir ticket.\n2. Volver a inicio.\n");
-		printf("\nElija opcion:  ");
+		printf("\nElija opcion: ");
 		fflush(stdout);
 		scanf("%i", &eleccion);
-		fflush(stdin);
 		switch (eleccion) {
 		case 1:
-			ticket(&res);
-			printf("\nPulse una tecla para volver al menu principal");
 			fflush(stdout);
-			fflush(stdin);
+			ticket(&res);
+			printf("\nPulse una tecla para volver al menu principal... ");
+			fflush(stdout);
 			c = getch();
 			inicio();
 			break;

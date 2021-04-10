@@ -26,11 +26,11 @@ void inicioUsuario(Usuario u) {
 
 		if (letra == 'p') {
 			fflush(stdin);
-			reservacion();
+			reservacion(u);
 		} else if (letra == 'm') {
 			fflush(stdin);
 			Reserva reserv[1];
-			mapa(reserv);
+			mapa(reserv, u);
 		} else if (letra == 'r') {
 		} else {
 			printf("LETRA INVALIDA INSERTE UNO NUEVO: ");

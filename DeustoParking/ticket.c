@@ -17,7 +17,7 @@ void ticket(Reserva *res) {
 
 		fclose(freserva);
 	}
-	printf("\n======DATOS DE LA RESERVA======\n");
+	printf("\n------ DATOS DE LA RESERVA ------\n");
 	printf("Nombre: %s\n", res->nombre);
 	printf("Apellido: %s\n", res->apellido);
 	printf("DNI: %s\n", res->dni);

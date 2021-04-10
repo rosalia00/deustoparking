@@ -1,6 +1,7 @@
 #include "reserva.h"
 #include "inicioUsuario.h"
 #include "inicio.h"
+#include "registrarse.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -66,8 +67,7 @@ void crearMapa(int piso) {
 	fflush(stdout);
 }
 
-void inicioMapa(int piso, char **map, int tamanyoMapa) {
-
+void inicioMapa(int piso, char **map, int tamanyoMapa, Usuario u) {
 	int opcion = 0;
 	printf("\nESTA USTED EN EL PISO %i, SELECCIONE UNA OPCIÓN: ", piso);
 	fflush(stdout);
@@ -108,7 +108,7 @@ void inicioMapa(int piso, char **map, int tamanyoMapa) {
 
 			break;
 		case 3:
-			inicioUsuario();
+			inicioUsuario(u);
 
 			break;
 		default:
@@ -118,13 +118,13 @@ void inicioMapa(int piso, char **map, int tamanyoMapa) {
 
 			break;
 		}
-		inicioMapa(piso, map, tamanyoMapa);
+		inicioMapa(piso, map, tamanyoMapa, u);
 
 	} while (0);
 
 }
 
-void mapa(Reserva arRsv[]) {
+void mapa(Reserva arRsv[], Usuario u) {
 
 	char **map = malloc(30 * sizeof(char*));
 	int tamanyoMapa = 11;
@@ -152,7 +152,7 @@ void mapa(Reserva arRsv[]) {
 	printf("3. Volver\n");
 	fflush(stdout);
 
-	inicioMapa(piso, map, tamanyoMapa);
+	inicioMapa(piso, map, tamanyoMapa, u);
 
 	int tamanyoReserva = sizeof(arRsv) / sizeof *arRsv;
 	int plazas[tamanyoReserva];

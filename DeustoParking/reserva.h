@@ -1,3 +1,5 @@
+#include "registrarse.h"
+
 #ifndef RESERVA_H_
 #define RESERVA_H_
 
@@ -14,10 +16,7 @@ typedef struct {
 
 } Reserva;
 
-Reserva reservacion();
-
-
-
+Reserva reservacion(Usuario u);
 void ticket(Reserva *res);
 void imprimidorArray(char cadena[]);
 
