@@ -146,15 +146,11 @@ void mapa(Reserva arRsv[]) {
 	map[10] = "  ===================\n";
 
 	int piso = 1;
-	int opcion = 0;
 	crearMapa(piso);
 	printf("1. Subir\n");
 	printf("2. Bajar\n");
 	printf("3. Volver\n");
 	fflush(stdout);
-//	printf("\nESTA USTED EN EL PISO %i, SELECCIONE UNA LETRA: ", piso);
-//	fflush(stdout);
-//	scanf("%i", &opcion);
 
 	inicioMapa(piso, map, tamanyoMapa);
 

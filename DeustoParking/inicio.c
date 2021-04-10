@@ -56,20 +56,6 @@ void inicio() {
 			valido = true;
 			break;
 		}
-		/*
-		 if (letra == 'i') {
-		 loggearse(); //llamamos al método
-		 } else if (letra == 'r') {
-		 registrarse();
-		 } else {
-		 printf("\n LETRA INVALIDA INSERTE UNO NUEVO: ");
-		 fflush(stdout);
-		 char linea[5];
-		 cleanStdIn(linea, 5);
-		 fgets(linea, 5, stdin);
-		 sscanf(linea, "%c", &letra);
-		 letra = tolower(letra);
-		 } */
 	} while (valido);
 	system("cls");
 
