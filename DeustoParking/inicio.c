@@ -24,7 +24,6 @@ void inicio() {
 	printf("s -> Salir del programa. \n");
 	printf("\n");
 	printf("INTRODUZCA LA LETRA: ");
-
 	fflush(stdout);
 
 	do {
@@ -45,7 +44,8 @@ void inicio() {
 			valido = false;
 			break;
 		case 's':
-			printf("\n Saliendo del programa en 3 segundos...");
+			printf("\nSaliendo del programa en 3 segundos...");
+			fflush(stdout);
 			Sleep(3000);
 			exit(1);
 		default:
@@ -58,5 +58,4 @@ void inicio() {
 		}
 	} while (valido);
 	system("cls");
-
 }

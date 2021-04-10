@@ -8,7 +8,7 @@
 #include "inicio.h"
 #include <windows.h>
 
-Reserva reservacion() {
+Reserva reservacion(Usuario u) {
 
 	Reserva res;
 
@@ -28,8 +28,7 @@ Reserva reservacion() {
 
 	printf("MATRICULA: ");
 	fflush(stdout);
-	//fgets(matricula, 20, stdin);
-	scanf("%s", matricula);
+	fgets(matricula, 20, stdin);
 	matricula = quitadorContrabarraN(matricula);
 
 	printf("PLAZA: ");
@@ -98,26 +97,28 @@ Reserva reservacion() {
 	strcat(datafinFinal, "-");
 	strcat(datafinFinal, datafin3);
 
-	res.apellido = "apellido";
+	res.apellido = u.apellido;
 	res.datafin = datafinFinal;
 	res.datainicio = datainFinal;
-	res.dni = "dni";
+	res.dni = u.dni;
 	res.matricula = matricula;
-	res.nombre = "nombre";
+	res.nombre = u.nombre;
 	res.plaza = plaza;
 	res.precio = tipoBono();
-	res.tarjeta = 123;
+	res.tarjeta = u.numTarj;
 	system("cls");
 	do {
 		printf("\n");
-		printf("\n 1. Imprimir ticket. \n 2. Volver a inicio. \n");
-		printf("\n Elija opcion:  ");
+		printf("\n1. Imprimir ticket.\n2. Volver a inicio.\n");
+		printf("\nElija opcion:  ");
 		fflush(stdout);
 		scanf("%i", &eleccion);
+		fflush(stdin);
 		switch (eleccion) {
 		case 1:
 			ticket(&res);
-			printf("\n Pulse una tecla para volver al menu principal");
+			printf("\nPulse una tecla para volver al menu principal");
+			fflush(stdout);
 			fflush(stdin);
 			c = getch();
 			inicio();
@@ -126,26 +127,15 @@ Reserva reservacion() {
 			fflush(stdin);
 			inicio();
 			break;
-			defalut: printf("CARACTER INVALIDO. INSERTE UNO NUEVO: ");
+		default:
+			printf("CARACTER INVALIDO. INSERTE UNO NUEVO: ");
+			fflush(stdout);
 			fflush(stdin);
 			c = getch();
 			break;
 		}
 	} while (eleccion <= 0 || eleccion >= 3);
 
-	/*
-	 if (eleccion == 1) {
-	 //escribir(matricula, plaza, horaI, horaF, fid, fim, fia, ffd, ffm, ffa);
-	 ticket(&res);
-
-	 } else if (eleccion == 2) {
-	 inicio();
-	 } else {
-	 printf("CARACTER INVALIDO INSERTE UNO NUEVO: ");
-	 fflush(stdout);
-	 scanf("%i", &eleccion);
-	 }
-	 */
 	return res;
 }
 

@@ -5,18 +5,18 @@
 float tipoBono() {
 	int op = 0;
 	float tipoBono;
-	int c;
+	int c = 0;
 
 	do {
-		printf("\n");
-		printf("\n TIPOS DE BONO: ");
-		printf("\n 1. Bono Semanal Alumnado: 62,99 Euros. ");
-		printf("\n 2. Bono Semana Profesorado: 75,59 Euros. ");
-		printf("\n 3. Bono Mensual Alumnado: 209,99 Euros. ");
-		printf("\n 4. Bono Mensual Profesorado: 251,99 Euros. ");
-		printf("\n 5. Bono Anual Alumnado: 1.641,99 Euros. ");
-		printf("\n 6. Bono Anual Profesorado: 1.970,39 Euros. ");
-		printf("\n Elija tipo de Bono: ");
+		printf("\nTIPOS DE BONO: ");
+		printf("\n1. Bono Semanal Alumnado: 62,99 Euros. ");
+		printf("\n2. Bono Semana Profesorado: 75,59 Euros. ");
+		printf("\n3. Bono Mensual Alumnado: 209,99 Euros. ");
+		printf("\n4. Bono Mensual Profesorado: 251,99 Euros. ");
+		printf("\n5. Bono Anual Alumnado: 1.641,99 Euros. ");
+		printf("\n6. Bono Anual Profesorado: 1.970,39 Euros. ");
+		printf("\nElija tipo de Bono: ");
+		fflush(stdout);
 		scanf("%d", &op);
 		switch (op) {
 		case 1:
@@ -45,7 +45,7 @@ float tipoBono() {
 			break;
 		default:
 			printf(
-					"\n Opcion Erronea. Debe elegir entre 1 - 6. Pulse una tecla para continuar... \n");
+					"\nOpcion Erronea. Debe elegir entre 1 - 6. Pulse una tecla para continuar... \n");
 			//limpia teclado
 			fflush(stdin);
 			c = getch();

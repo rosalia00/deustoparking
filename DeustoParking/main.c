@@ -5,7 +5,6 @@
 #include "mapa.h"
 #include "inicioUsuario.h"
 
-
 int main(void) {
 	inicio();
 //	Reserva reserv[1];

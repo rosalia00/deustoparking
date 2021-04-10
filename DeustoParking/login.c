@@ -2,24 +2,29 @@
 #include <stdlib.h>
 #include <string.h>
 #include "registrarse.h"
+#include "inicioUsuario.h"
 
 void loggearse() {
-	char *dni; //Cuando pongamos * usamos malloc :) 10/10
-	dni = (char*)malloc(10 * sizeof (char)); //reservamos 9 huekitos, ponerlo cuando lo stateemos
-
-	int contrasenya;//en los ints NO hacemos malloc xd
+	char *dni;
+	dni = (char*) malloc(10 * sizeof(char));
+	int contrasenya;
 
 	printf("\nIntroduzca su DNI: ");
 	fflush(stdout);
 	fgets(dni, 10, stdin);
-
-	dni = quitadorContrabarraN(dni); //le pasamos dni para quitarle contrabarra a dni :$ Y SOLO CON CHARS
+	dni = quitadorContrabarraN(dni);
 
 	printf("Introduzca su contrasenya: ");
 	fflush(stdout);
-	scanf("%i", &contrasenya); //el % identifica el TIPO pq c es retra | &usamos para acceder dentro de valor int
+	scanf("%i", &contrasenya);
 
-	printf("%s", dni);
-	printf("%i", contrasenya);
+	Usuario u;
+	u.dni = dni;
+	u.contrasenya = contrasenya;
+	u.nombre = "nombre_prueba";
+	u.apellido = "apellido_prueba";
+	u.numTarj = 12341234;
+	u.telefono = 123456789;
+	inicioUsuario(u);
 }
 

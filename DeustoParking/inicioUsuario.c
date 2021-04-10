@@ -4,17 +4,16 @@
 #include "inicio.h"
 #include "mapa.h"
 #include "tipoBono.h"
+#include "registrarse.h"
 
-void inicioUsuario() {
-	char letra;
-	printf(" == BIENVENIDO == \n");
+void inicioUsuario(Usuario u) {
+	printf("\n=== === === BIENVENIDO %s=== === ===\n", u.nombre);
 	printf("\n");
 	printf("p -> Reservar plazas.\n");
 	printf("m -> Mapa.\n");
-	printf("r -> Reservas.\n");
+	printf("r -> Reservas. (Aún no disponible)\n");
 	printf("\n");
 	printf("INTRODUZCA LA LETRA: ");
-
 	fflush(stdout);
 
 	do {
@@ -22,16 +21,17 @@ void inicioUsuario() {
 		char linea[5];
 		cleanStdIn(linea, 5);
 		fgets(linea, 5, stdin);
-		//sscanf(linea, "%c", &letra);
 		letra = getchar();
 		letra = tolower(letra);
 
 		if (letra == 'p') {
-			reservacion(); //llamamos al m�todo
+			fflush(stdin);
+			reservacion();
 		} else if (letra == 'm') {
-			//	mapa();
+			fflush(stdin);
+			Reserva reserv[1];
+			mapa(reserv);
 		} else if (letra == 'r') {
-			//dejamos vacío pq falta bbdd :(
 		} else {
 			printf("LETRA INVALIDA INSERTE UNO NUEVO: ");
 			fflush(stdout);

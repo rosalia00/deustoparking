@@ -27,4 +27,5 @@ void ticket(Reserva *res) {
 	printf("Precio: %.2f\n", res->precio);
 	printf("Matricula: %s\n", res->matricula);
 	printf("Plaza: %i\n", res->plaza);
+	fflush(stdout);
 }

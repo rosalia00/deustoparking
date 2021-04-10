@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "registrarse.h"
+#include "login.h"
 
 char* quitadorContrabarraN(char *s) {
 	char *n;
-	n = (char*)malloc(strlen(s ? s : "\n"));
+	n = (char*) malloc(strlen(s ? s : "\n"));
 	if (s) {
 		strcpy(n, s);
 	}
@@ -16,11 +17,11 @@ char* quitadorContrabarraN(char *s) {
 void registrarse() {
 
 	char *nombre;
-	nombre = (char *)malloc(20 * sizeof(char));
+	nombre = (char*) malloc(20 * sizeof(char));
 	char *apellido;
-	apellido = (char*)malloc(20 * sizeof(char));
+	apellido = (char*) malloc(20 * sizeof(char));
 	char *dni;
-	dni = (char*)malloc(9 * sizeof(char));
+	dni = (char*) malloc(10 * sizeof(char));
 	int telefono = 0;
 	int numTarj = 0;
 	int contrasenya = 0;
@@ -41,6 +42,7 @@ void registrarse() {
 	printf("Insertar DNI: ");
 	fflush(stdout);
 	fgets(dni, 10, stdin);
+	dni = quitadorContrabarraN(dni);
 
 	printf("Insertar Telefono: ");
 	fflush(stdout);
@@ -53,4 +55,10 @@ void registrarse() {
 	printf("Insertar Contrasenya Numerica: ");
 	fflush(stdout);
 	scanf("%i", &contrasenya);
+
+	printf("-----------------------------\n");
+	fflush(stdout);
+
+	fflush(stdin);
+	loggearse();
 }
