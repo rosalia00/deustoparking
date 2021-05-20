@@ -94,6 +94,101 @@ int administrarBono(sqlite3 *db, float precio, int opcion) {
 
 	return SQLITE_OK;
 }
+//TXT A BD
+int guardarTicket(sqlite3 *db, Reserva *res) {
+
+	sqlite3_stmt *stmt;
+
+	char sql[] =
+			"INSERT INTO RESERVA (MATRICULA, FECHAI, FECHAF, PLAZA, DNI, NOMBRE, APELLIDO, TARJETA, PRECIO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+	if (resultado != SQLITE_OK) {
+		cout << "Error preparando la declaración (INSERT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 1, res->matricula);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro matricula" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 2, res->datainicio);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro fecha inicio" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 3, res->datafin);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro fecha fin" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 4, res->plaza);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro plaza" << endl << sqlite3_errmsg(db)
+				<< endl;
+		return resultado;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 5, res->dni);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro dni" << endl << sqlite3_errmsg(db)
+				<< endl;
+		return resultado;
+	}
+	resultado = sqlite3_bind_int(stmt, 6, res->nombre);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro nombre" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 7, res->apellido);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro apellido" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 8, res->tarjeta);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro tarjeta" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 9, res->precio);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro precio" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	//pa q funcione
+	resultado = sqlite3_step(stmt);
+	if (resultado == SQLITE_OK) {
+		cout << "Error insertar los datos." << endl << sqlite3_errmsg(db)
+				<< endl;
+		return resultado;
+	}
+
+	//para terminar la DECLARACIÓN
+	resultado = sqlite3_finalize(stmt);
+	if (resultado != SQLITE_OK) {
+		cout << "Error terminando la declaracion (INSERT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	return SQLITE_OK;
+}
 
 sqlite3 *db;
 int rc = sqlite3_open("test.db", &db);
