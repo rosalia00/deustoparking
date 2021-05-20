@@ -8,5 +8,6 @@ static int callback(void *data, int argc, char **argv, char **azColName);
 int cuentaReservas(sqlite3 *db);
 int administrarBono(sqlite3 *db, float precio, int opcion);
 void recogeReservas(Reserva*, sqlite3 *db);
+int guardarTicket(sqlite3 *db, Reserva *res);
 
 #endif /* DATABASE_H_ */

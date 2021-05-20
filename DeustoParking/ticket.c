@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "reserva.h"
+#include "database.h"
 
-void ticket(Reserva *res) {
+void ticket(Reserva *res, sqlite3 *db) {
 	FILE *freserva;
 	freserva = fopen("ticket.dat", "a");
 	if (freserva != NULL) {
@@ -17,6 +18,9 @@ void ticket(Reserva *res) {
 
 		fclose(freserva);
 	}
+	//llamamos a la funzión
+	int guardarTicket(db, res);
+
 	printf("\n------ DATOS DE LA RESERVA ------\n");
 	printf("Nombre: %s\n", res->nombre);
 	printf("Apellido: %s\n", res->apellido);
