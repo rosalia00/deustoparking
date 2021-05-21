@@ -38,7 +38,7 @@ int cuentaReservas(sqlite3 *db) {
 	return numReserv;
 }
 
-void recogeReservas(Reserva*, sqlite3 *db) {
+void recogeReservas(Reserva* res, sqlite3 *db) {
 
 }
 

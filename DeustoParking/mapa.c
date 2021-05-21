@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "sqlite3.h"
 
 char cambiador(char cosos[], char cosoacambiar) {
 
@@ -67,7 +68,7 @@ void crearMapa(int piso) {
 	fflush(stdout);
 }
 
-void inicioMapa(int piso, char **map, int tamanyoMapa, Usuario u) {
+void inicioMapa(int piso, char **map, int tamanyoMapa, Usuario u, sqlite3 *db) {
 	int opcion = 0;
 	printf("\nESTA USTED EN EL PISO %i, SELECCIONE UNA OPCIÓN: ", piso);
 	fflush(stdout);
@@ -108,7 +109,7 @@ void inicioMapa(int piso, char **map, int tamanyoMapa, Usuario u) {
 
 			break;
 		case 3:
-			inicioUsuario(u);
+			inicioUsuario(u, db);
 
 			break;
 		default:
@@ -118,13 +119,13 @@ void inicioMapa(int piso, char **map, int tamanyoMapa, Usuario u) {
 
 			break;
 		}
-		inicioMapa(piso, map, tamanyoMapa, u);
+		inicioMapa(piso, map, tamanyoMapa, u, db);
 
 	} while (0);
 
 }
 
-void mapa(Reserva arRsv[], Usuario u) {
+void mapa(Reserva arRsv[], Usuario u, sqlite3 *db) {
 
 	char **map = malloc(30 * sizeof(char*));
 	int tamanyoMapa = 11;
@@ -152,7 +153,7 @@ void mapa(Reserva arRsv[], Usuario u) {
 	printf("3. Volver\n");
 	fflush(stdout);
 
-	inicioMapa(piso, map, tamanyoMapa, u);
+	inicioMapa(piso, map, tamanyoMapa, u, db);
 
 	int tamanyoReserva = sizeof(arRsv) / sizeof *arRsv;
 	int plazas[tamanyoReserva];

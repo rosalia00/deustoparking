@@ -5,8 +5,9 @@
 #include "mapa.h"
 #include "tipoBono.h"
 #include "registrarse.h"
+#include "sqlite3.h"
 
-void inicioUsuario(Usuario u) {
+void inicioUsuario(Usuario u, sqlite3 *db) {
 	printf("\n=== === === BIENVENIDO %s=== === ===\n", u.nombre);
 	printf("\n");
 	printf("p -> Reservar plazas.\n");
@@ -26,11 +27,11 @@ void inicioUsuario(Usuario u) {
 
 		if (letra == 'p') {
 			fflush(stdin);
-			reservacion(u);
+			reservacion(u, db);
 		} else if (letra == 'm') {
 			fflush(stdin);
 			Reserva reserv[1];
-			mapa(reserv, u);
+			mapa(reserv, u, db);
 		} else if (letra == 'r') {
 		} else {
 			printf("LETRA INVALIDA INSERTE UNO NUEVO: ");

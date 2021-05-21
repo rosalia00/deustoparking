@@ -3,8 +3,9 @@
 #include <string.h>
 #include "registrarse.h"
 #include "inicioUsuario.h"
+#include "sqlite3.h"
 
-void loggearse() {
+void loggearse(sqlite3 *db) {
 	char *dni;
 	dni = (char*) malloc(10 * sizeof(char));
 	int contrasenya;
@@ -25,6 +26,6 @@ void loggearse() {
 	u.apellido = "apellido_prueba";
 	u.numTarj = 12341234;
 	u.telefono = 123456789;
-	inicioUsuario(u);
+	inicioUsuario(u, db);
 }
 

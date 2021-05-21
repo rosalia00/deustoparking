@@ -7,8 +7,9 @@
 #include <conio.h>
 #include "inicio.h"
 #include <windows.h>
+#include "sqlite3.h"
 
-Reserva reservacion(Usuario u) {
+Reserva reservacion(Usuario u, sqlite3 *db) {
 
 	Reserva res;
 
@@ -116,7 +117,7 @@ Reserva reservacion(Usuario u) {
 		switch (eleccion) {
 		case 1:
 			fflush(stdout);
-			ticket(&res);
+			ticket(&res, db);
 			printf("\nPulse una tecla para volver al menu principal... ");
 			fflush(stdout);
 			c = getch();
