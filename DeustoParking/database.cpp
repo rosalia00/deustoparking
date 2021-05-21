@@ -196,7 +196,7 @@ int guardarTicket(sqlite3 *db, Reserva *res) {
 	return SQLITE_OK;
 }
 
-sqlite3 *db;
-int rc = sqlite3_open("test.db", &db);
-int a = cuentaReservas(db)
+//sqlite3 *db;
+//int rc = sqlite3_open("test.db", &db);
+//int a = cuentaReservas(db)
 
