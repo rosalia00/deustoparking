@@ -1,4 +1,7 @@
+extern "C"{
 #include "inicio.h"
+}
+
 #include "registrarse.h"
 #include "login.h"
 #include "reserva.h"
