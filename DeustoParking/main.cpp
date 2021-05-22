@@ -9,9 +9,11 @@ extern "C"{
 #include "inicioUsuario.h"
 
 int main(void) {
-	inicio();
+	//inicio();
 //	Reserva reserv[1];
-//	mapa(reserv);
+	Usuario u = {"a", "b", "c", 1, 2, 3};
+	sqlite3 *db;
+	mapa(u, db);
 	//inicioUsuario();
 	//tipoBono();
 	return 0;

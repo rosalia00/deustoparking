@@ -1,25 +1,31 @@
+extern "C"{
 #include "reserva.h"
 #include "inicioUsuario.h"
 #include "inicio.h"
 #include "registrarse.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "sqlite3.h"
+}
 
+#include "database.h"
+#include <stdlib.h>
+#include <string>
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
+using namespace std;
+/*
 char cambiador(char cosos[], char cosoacambiar) {
 
 	char resultado;
 	int i = 0;
-
-	printf("COSOS[ %i ]: %c\n", i, cosos[i]);
-	printf("COSOACAMBIAR: %c\n", cosoacambiar);
+	cout<<"COSOS["<<i<<"]:"<<cosos[i]<<endl;
+	cout<<"COSOACAMBIAR: "<<cosoacambiar<<endl;
 
 	for (i = 0; cosos[i] != '\0'; ++i) {
 		resultado = cosoacambiar;
 	}
 
-	printf("RESULTADO: %c\n", resultado);
+	cout<<"RESULTADO: "<<resultado<<endl;
 
 	return resultado;
 
@@ -28,7 +34,7 @@ char cambiador(char cosos[], char cosoacambiar) {
 void imprimirMapa(char **mapa, int tamanyoMapa) {
 	int x;
 	for (x = 0; x < tamanyoMapa; ++x) {
-		printf("%s", mapa[x]);
+		cout<<mapa[x]<<endl;
 	}
 }
 
@@ -47,7 +53,7 @@ void crearMapa(int piso) {
 		arNum[w] = primeraPlaza;
 		primeraPlaza++;
 	}
-
+	/*
 	printf("  ==============================\n");
 	printf("//   [%i][%i][%i][%i][%i][%i]   \\\\ \n", arNum[0], arNum[1],
 			arNum[2], arNum[3], arNum[4], arNum[5]);
@@ -70,11 +76,10 @@ void crearMapa(int piso) {
 
 void inicioMapa(int piso, char **map, int tamanyoMapa, Usuario u, sqlite3 *db) {
 	int opcion = 0;
-	printf("\nESTA USTED EN EL PISO %i, SELECCIONE UNA OPCIÓN: ", piso);
-	fflush(stdout);
+	cout<<"ESTA USTED EN EL PISO "<<piso<<", SELECCIONE UNA OPCION:"<<endl;
 
-	do {
-		scanf("%i", &opcion);
+	/*do {
+		//scanf("%i", &opcion);
 		switch (opcion) {
 		case 1:
 			if (piso != 3) {
@@ -123,16 +128,28 @@ void inicioMapa(int piso, char **map, int tamanyoMapa, Usuario u, sqlite3 *db) {
 
 	} while (0);
 
-}
-
-void mapa(Reserva arRsv[], Usuario u, sqlite3 *db) {
-
-	char **map = malloc(30 * sizeof(char*));
-	int tamanyoMapa = 11;
-	int h;
-	for (h = 0; h < tamanyoMapa; h++) {
-		map[h] = (char*) malloc(50 * sizeof(char));
+}*/
+bool checkReserva(int plaza, sqlite3 *db){
+	bool esCierto = false;
+	/*int tamanyoReserva = cuentaReservas(db);
+	Reserva *reservas = new Reserva[tamanyoReserva];
+	recogeReservas(reservas, db);*/
+	int tamanyoReserva = 5;
+	int reservas[] = {20, 22, 12, 3, 5};
+	int var;
+	for (var = 0;  var < tamanyoReserva; ++ var) {
+		if (reservas[var] == plaza) {
+			esCierto = true;
+		}
 	}
+	return esCierto;
+}
+void mapa(Usuario u, sqlite3 *db) {
+
+	string* map = new string[10];
+
+	int h;
+
 
 	map[0] = "  ===================\n";
 	map[1] = "// [ ][ ][ ][ ][ ][ ] \\\\ \n";
@@ -147,22 +164,44 @@ void mapa(Reserva arRsv[], Usuario u, sqlite3 *db) {
 	map[10] = "  ===================\n";
 
 	int piso = 1;
-	crearMapa(piso);
-	printf("1. Subir\n");
+	//crearMapa(piso);
+	/*printf("1. Subir\n");
 	printf("2. Bajar\n");
 	printf("3. Volver\n");
-	fflush(stdout);
+	fflush(stdout);*/
 
-	inicioMapa(piso, map, tamanyoMapa, u, db);
+	//inicioMapa(piso, map, tamanyoMapa, u, db);
 
-	int tamanyoReserva = sizeof(arRsv) / sizeof *arRsv;
-	int plazas[tamanyoReserva];
+
+
+	int primeraPlaza = 0;
+	int *numPlaza = new int[36];
 
 	int var;
-	for (var = 0; var < tamanyoReserva; ++var) {
-		plazas[var] = arRsv[var].plaza;
+	for (var = 0; var < 36; ++var) {
+		numPlaza[var] = var;
 	}
 
+	int iteradorNumPlaza = 0;
+	for (var = 0; var < 11; ++var) {
+		int x = 0;
+		for (std::string::iterator it=map[var].begin(); it!=map[var].end(); ++it) {
+			 if (map[var][x] == '[' && map[var][x + 2] == ']'){
+				 if(checkReserva(x, db) == true){
+					 map[var][x] = 'x';
+					 iteradorNumPlaza++;
+				 }
+				 else
+				 {
+					 map[var][x] == numPlaza[iteradorNumPlaza];
+				 }
+				 iteradorNumPlaza++;
+			 }
+			 x++;
+
+		}
+		cout<<map[var];
+	}
 	/*
 	 int k = 0;
 	 int j;

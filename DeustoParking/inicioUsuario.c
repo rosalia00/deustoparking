@@ -31,7 +31,7 @@ void inicioUsuario(Usuario u, sqlite3 *db) {
 		} else if (letra == 'm') {
 			fflush(stdin);
 			Reserva reserv[1];
-			mapa(reserv, u, db);
+			mapa(u, db);
 		} else if (letra == 'r') {
 		} else {
 			printf("LETRA INVALIDA INSERTE UNO NUEVO: ");
