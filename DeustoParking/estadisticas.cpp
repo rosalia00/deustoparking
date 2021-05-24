@@ -7,9 +7,20 @@
  * SELECT AVG(PRECIO) FROM RESERVA
  */
 
+/* stringstream cons;
+
+cons << "SELECT AVG(PRECIO) FROM BONO";
+*/
+
 /* estadistica 2: precio más alto de las reservas
  * SELECT MAX(PRECIO) FROM RESERVA
  *
  * o selecciona precio maximo de un usuario
  * SLEECT MAX(PRECIO) FROM RESERVA WHERE DNI="dni usuario"
  */
+
+/*
+stringstream cons;
+ necesito un getDNI en reserva
+//cons << "SELECT ID FROM particular WHERE DNI LIKE '" << c->getDNI() << "'";
+*/
