@@ -4,6 +4,7 @@ extern "C" {
 #include "string.h"
 #include "usuario.h"
 #include "database.h"
+#include "inicioUsuario.h"
 #include <iostream>
 using namespace std;
 
@@ -70,6 +71,7 @@ void registrarse(sqlite3 *db) {
 	cout << endl << "USUARIO REGISTRADO" << endl
 			<< "--- --- ----------- --- ---" << endl;
 	baseDatosUsuarioRegistrar(db, u);
+	inicioUsuario(u, db);
 }
 
 //#include <stdio.h>

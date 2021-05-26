@@ -1,10 +1,3 @@
-/*
- * registrarse.h
- *
- *  Created on: 23 may. 2021
- *      Author: Tyler de Mier
- */
-
 #ifndef REGISTRARSE_H_
 #define REGISTRARSE_H_
 

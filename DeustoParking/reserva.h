@@ -1,8 +1,8 @@
-#include "registrarse.h"
-#include "sqlite3.h"
-
 #ifndef RESERVA_H_
 #define RESERVA_H_
+
+#include "usuario.h"
+#include "sqlite3.h"
 
 typedef struct {
 	char *nombre;
@@ -17,7 +17,7 @@ typedef struct {
 
 } Reserva;
 
-Reserva reservacion(Usuario u, sqlite3 *db);
+Reserva reservacion(Usuario *u, sqlite3 *db);
 void ticket(Reserva *res, sqlite3 *db);
 void imprimidorArray(char cadena[]);
 

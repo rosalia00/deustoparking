@@ -1,14 +1,18 @@
+extern "C" {
+#include "sqlite3.h"
+}
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include "inicio.h"
-#include "mapa.h"
-#include "tipoBono.h"
-#include "registrarse.h"
-#include "sqlite3.h"
+#include "reserva.h"
+#include "usuario.h"
+#include <iostream>
+using namespace std;
 
-void inicioUsuario(Usuario u, sqlite3 *db) {
-	printf("\n=== === === BIENVENIDO %s=== === ===\n");
+void inicioUsuario(Usuario *u, sqlite3 *db) {
+	cout << endl << "--- BIENVENIDO " << u->getNombre() << "---" << endl;
 	printf("\n");
 	printf("p -> Reservar plazas.\n");
 	printf("m -> Mapa.\n");

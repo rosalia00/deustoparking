@@ -13,7 +13,7 @@ void cleanStdIn(char *str, int max_line) {
 			;
 }
 
-void inicio() {
+void inicio(sqlite3 *db) {
 	bool valido = true;
 	system("cls");
 	fflush(stdout);
@@ -39,8 +39,8 @@ void inicio() {
 			loggearse();
 			valido = false;
 			break;
-//		case 'r':
-//			registrarse();
+		case 'r':
+			registrarse(db);
 			valido = false;
 			break;
 		case 's':

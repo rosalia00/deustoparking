@@ -1,7 +1,9 @@
+extern "C" {
+#include "sqlite3.h"
+}
 #include <stdio.h>
 #include "reserva.h"
 #include "database.h"
-#include "sqlite3.h"
 
 void ticket(Reserva *res, sqlite3 *db) {
 	FILE *freserva;
@@ -19,8 +21,8 @@ void ticket(Reserva *res, sqlite3 *db) {
 
 		fclose(freserva);
 	}
-	//llamamos a la funzión
-	//guardarTicket(db, res);
+
+	guardarTicket(db, res);
 
 	printf("\n------ DATOS DE LA RESERVA ------\n");
 	printf("Nombre: %s\n", res->nombre);

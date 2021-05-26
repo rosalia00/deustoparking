@@ -1,19 +1,18 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "reserva.h"
-#include "registrarse.h"
-#include "tipoBono.h"
-#include <string.h>
-#include <conio.h>
-#include "inicio.h"
-#include <windows.h>
+extern "C" {
 #include "sqlite3.h"
+}
+#include "usuario.h"
+#include "reserva.h"
+#include "tipoBono.h"
+#include "inicioUsuario.h"
+#include <cstring>
+#include <iostream>
+using namespace std;
 
-Reserva reservacion(Usuario u, sqlite3 *db) {
+Reserva reservacion(Usuario *u, sqlite3 *db) {
 
 	Reserva res;
 
-	char *matricula = (char*) malloc(7 * sizeof(char));
 	int plaza = 0;
 	int horaI = 0;
 	int horaF = 0;
@@ -26,11 +25,6 @@ Reserva reservacion(Usuario u, sqlite3 *db) {
 
 	int eleccion;
 	int c;
-
-	printf("MATRICULA: ");
-	fflush(stdout);
-	fgets(matricula, 20, stdin);
-//	matricula = quitadorContrabarraN(matricula);
 
 	printf("PLAZA: ");
 	fflush(stdout);
@@ -98,19 +92,19 @@ Reserva reservacion(Usuario u, sqlite3 *db) {
 	strcat(datafinFinal, "-");
 	strcat(datafinFinal, datafin3);
 
-	res.apellido = u.apellido;
+	res.apellido = u->getApellido();
 	res.datafin = datafinFinal;
 	res.datainicio = datainFinal;
-	res.dni = u.dni;
-	res.matricula = matricula;
-	res.nombre = u.nombre;
+	res.dni = u->getdni();
+	res.nombre = u->getNombre();
 	res.plaza = plaza;
 	res.precio = tipoBono();
-//	fflush(stdin);
-//	res.tarjeta = u.numTarj;
+	fflush(stdin);
+	res.tarjeta = u->getTarjeta();
 	system("cls");
 	do {
-		printf("\n1. Imprimir ticket.\n2. Volver a inicio.\n");
+		printf(
+				"\n1. Guardar e imprimir ticket.\n2. Cancelar y volver a inicio.\n");
 		printf("\nElija opcion: ");
 		fflush(stdout);
 		scanf("%i", &eleccion);
@@ -120,18 +114,18 @@ Reserva reservacion(Usuario u, sqlite3 *db) {
 			ticket(&res, db);
 			printf("\nPulse una tecla para volver al menu principal... ");
 			fflush(stdout);
-			c = getch();
-			inicio();
+			cin >> c;
+			inicioUsuario(u, db);
 			break;
 		case 2:
 			fflush(stdin);
-			inicio();
+			inicioUsuario(u, db);
 			break;
 		default:
 			printf("CARACTER INVALIDO. INSERTE UNO NUEVO: ");
 			fflush(stdout);
 			fflush(stdin);
-			c = getch();
+			cin >> c;
 			break;
 		}
 	} while (eleccion <= 0 || eleccion >= 3);
