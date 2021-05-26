@@ -30,7 +30,7 @@ Reserva reservacion(Usuario u, sqlite3 *db) {
 	printf("MATRICULA: ");
 	fflush(stdout);
 	fgets(matricula, 20, stdin);
-	matricula = quitadorContrabarraN(matricula);
+//	matricula = quitadorContrabarraN(matricula);
 
 	printf("PLAZA: ");
 	fflush(stdout);
@@ -106,8 +106,8 @@ Reserva reservacion(Usuario u, sqlite3 *db) {
 	res.nombre = u.nombre;
 	res.plaza = plaza;
 	res.precio = tipoBono();
-	fflush(stdin);
-	res.tarjeta = u.numTarj;
+//	fflush(stdin);
+//	res.tarjeta = u.numTarj;
 	system("cls");
 	do {
 		printf("\n1. Imprimir ticket.\n2. Volver a inicio.\n");

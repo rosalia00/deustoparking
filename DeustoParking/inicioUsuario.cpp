@@ -8,7 +8,7 @@
 #include "sqlite3.h"
 
 void inicioUsuario(Usuario u, sqlite3 *db) {
-	printf("\n=== === === BIENVENIDO %s=== === ===\n", u.nombre);
+	printf("\n=== === === BIENVENIDO %s=== === ===\n");
 	printf("\n");
 	printf("p -> Reservar plazas.\n");
 	printf("m -> Mapa.\n");

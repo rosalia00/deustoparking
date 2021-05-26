@@ -11,6 +11,7 @@ public:
 	Administrador(const char *dni, char *nombre, char *apellido, int telefono,
 			int tarjeta, char *contrasenya, const int nss, float salario);
 	Administrador(const Administrador &a);
+	Administrador();
 	virtual ~Administrador();
 
 	const int getNss();

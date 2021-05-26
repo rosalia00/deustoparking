@@ -5,8 +5,6 @@ using namespace std;
 
 Persona::Persona(const char *dni, char *nombre, char *apellido, int telefono,
 		int tarjeta, char *contrasenya) {
-
-	cout << endl << "Guardando la persona..." << endl;
 	this->dni = new char[strlen(dni) + 1];
 	strcpy(this->dni, dni);
 	this->nombre = new char[strlen(nombre) + 1];
@@ -19,8 +17,6 @@ Persona::Persona(const char *dni, char *nombre, char *apellido, int telefono,
 	strcpy(this->contrasenya, contrasenya);
 }
 Persona::Persona(const Persona &p) {
-
-	cout << endl << "Copiando la persona..." << endl;
 	this->dni = new char[strlen(p.dni) + 1];
 	strcpy(this->dni, p.dni);
 	this->nombre = new char[strlen(p.nombre) + 1];
@@ -32,8 +28,15 @@ Persona::Persona(const Persona &p) {
 	this->contrasenya = new char[strlen(p.contrasenya) + 1];
 	strcpy(this->contrasenya, p.contrasenya);
 }
+Persona::Persona() {
+	this->dni = "";
+	this->nombre = "";
+	this->apellido = "";
+	this->telefono = 0;
+	this->tarjeta = 0;
+	this->contrasenya = "";
+}
 Persona::~Persona() {
-	cout << endl << "Destruyendo la persona..." << endl;
 	delete[] dni;
 	delete[] nombre;
 	delete[] apellido;

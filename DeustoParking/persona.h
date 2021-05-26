@@ -1,8 +1,8 @@
-#ifndef PERSONA_H_
-#define PERSONA_H_
+#ifndef _PERSONA_H_
+#define _PERSONA_H_
 
 class Persona {
-private:
+public:
 	char *dni;
 	char *nombre;
 	char *apellido;
@@ -14,6 +14,7 @@ public:
 	Persona(const char *dni, char *nombre, char *apellido, int telefono,
 			int tarjeta, char *contrasenya);
 	Persona(const Persona &p);
+	Persona();
 	virtual ~Persona();
 
 	const char* getdni();

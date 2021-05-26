@@ -1,10 +1,10 @@
-
 #ifndef USUARIO_H_
 #define USUARIO_H_
 
 #include "persona.h"
 
 class Usuario: public Persona {
+public:
 	char *tipo;
 	char *matricula;
 
@@ -12,6 +12,7 @@ public:
 	Usuario(const char *dni, char *nombre, char *apellido, int telefono,
 			int tarjeta, char *contrasenya, char *tipo, char *matricula);
 	Usuario(const Usuario &u);
+	Usuario();
 	virtual ~Usuario();
 
 	char* getTipo();

@@ -39,8 +39,8 @@ void inicio() {
 			loggearse();
 			valido = false;
 			break;
-		case 'r':
-			registrarse();
+//		case 'r':
+//			registrarse();
 			valido = false;
 			break;
 		case 's':

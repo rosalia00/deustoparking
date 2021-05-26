@@ -20,6 +20,12 @@ Usuario::Usuario(const Usuario &u) :
 	this->matricula = u.matricula;
 
 }
+Usuario::Usuario() :
+		Persona() {
+	this->tipo = "";
+	this->matricula = "";
+}
+
 Usuario::~Usuario() {
 	delete[] tipo;
 	delete[] matricula;

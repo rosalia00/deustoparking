@@ -11,9 +11,9 @@ extern "C"{
 int main(void) {
 	//inicio();
 //	Reserva reserv[1];
-	Usuario u = {"a", "b", "c", 1, 2, 3};
-	sqlite3 *db;
-	mapa(u, db);
+//	Usuario u = {"a", "b", "c", 1, 2, 3};
+//	sqlite3 *db;
+//	mapa(u, db);
 	//inicioUsuario();
 	//tipoBono();
 	return 0;
