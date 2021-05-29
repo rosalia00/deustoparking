@@ -4,9 +4,8 @@
 #ifndef MAPA_H_
 #define MAPA_H_
 
-void mapa(Usuario u, sqlite3 *db);
-char cambiador(char cosos[], char cosoacambiar);
-void imprimirMapa(char **mapa, int tamanyoMapa);
-void inicioMapa(int piso, char **map, int tamanyoMapa, Usuario u, sqlite3 *db);
+bool checkReserva(int plaza, sqlite3 *db);
+void printMapa(int piso, sqlite3 *db);
+void ventanaMapa(int piso, sqlite3 *db, Usuario *u);
 
 #endif

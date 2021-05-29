@@ -8,6 +8,7 @@ extern "C" {
 #include "inicio.h"
 #include "reserva.h"
 #include "usuario.h"
+#include "mapa.h"
 #include <iostream>
 using namespace std;
 
@@ -34,8 +35,7 @@ void inicioUsuario(Usuario *u, sqlite3 *db) {
 			reservacion(u, db);
 		} else if (letra == 'm') {
 			fflush(stdin);
-			Reserva reserv[1];
-			mapa(u, db);
+			ventanaMapa(1, db, u);
 		} else if (letra == 'r') {
 		} else {
 			printf("LETRA INVALIDA INSERTE UNO NUEVO: ");

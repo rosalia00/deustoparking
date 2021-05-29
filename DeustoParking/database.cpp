@@ -8,39 +8,59 @@ extern "C" {
 #include <iostream>
 using namespace std;
 
-static int callback(void *data, int argc, char **argv, char **azColName) {
-	int i;
-	fprintf(stderr, "%s: ", (const char*) data);
+int cuentaReservas(sqlite3 *db) {
+	float numReserv;
+	sqlite3_stmt *stmt;
 
-	for (i = 0; i < argc; i++) {
-		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+	char sql[] = "SELECT COUNT(*) FROM RESERVA";
+
+	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+	if (resultado != SQLITE_OK) {
+		cout << "Error preparando la declaración (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
 	}
 
-	printf("\n");
-	return 0;
-}
+	resultado = sqlite3_step(stmt);
+	if (resultado == SQLITE_ROW) {
+		numReserv = sqlite3_column_double(stmt, 0);
+	}
 
-int cuentaReservas(sqlite3 *db) {
-	sqlite3_stmt *stmt;
-	char *zErrMsg = 0;
-	int rc;
-	int numReserv = 0;
-
-	int result = sqlite3_exec(db, "SELECT COUNT(*) FROM RESERVA", callback,
-			&numReserv, &zErrMsg);
-	if (result) {
-		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-		sqlite3_free(zErrMsg);
-	} else {
-		printf("count: %d\n", numReserv);
-		return numReserv;
+	resultado = sqlite3_finalize(stmt);
+	if (resultado != SQLITE_OK) {
+		cout << "Error terminando la declaracion (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
 	}
 
 	return numReserv;
 }
 
-void recogeReservas(Reserva *res, sqlite3 *db) {
+void recogeReservas(int *listaNum, sqlite3 *db, int tamanyo) {
+	sqlite3_stmt *stmt;
 
+	char sql[] = "SELECT PLAZA FROM RESERVA";
+
+	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+	if (resultado != SQLITE_OK) {
+		cout << "Error preparando la declaración (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+	}
+
+	int i = 0;
+	do{
+	resultado = sqlite3_step(stmt);
+	if (resultado == SQLITE_ROW) {
+		listaNum[i] = sqlite3_column_double(stmt, 0);
+	}
+	i++;
+	}while(resultado == SQLITE_ROW);
+
+	resultado = sqlite3_finalize(stmt);
+	if (resultado != SQLITE_OK) {
+		cout << "Error terminando la declaracion (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+	}
 }
 
 /* --- ADMINISTRAR BONOS --- */
@@ -285,7 +305,3 @@ int baseDatosUsuarioRegistrar(sqlite3 *db, Usuario *u) {
 
 	return SQLITE_OK;
 }
-//sqlite3 *db;
-//int rc = sqlite3_open("test.db", &db);
-//int a = cuentaReservas(db)
-

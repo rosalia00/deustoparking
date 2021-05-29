@@ -1,230 +1,124 @@
-extern "C"{
-#include "reserva.h"
-#include "inicioUsuario.h"
-#include "inicio.h"
-#include "registrarse.h"
-#include "sqlite3.h"
-}
-
-#include "database.h"
 #include <stdlib.h>
 #include <string>
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include <bits/stdc++.h>
+#include "database.h"
+#include "inicioUsuario.h"
+extern "C" {
+#include "sqlite3.h"
+}
 using namespace std;
-/*
-char cambiador(char cosos[], char cosoacambiar) {
 
-	char resultado;
-	int i = 0;
-	cout<<"COSOS["<<i<<"]:"<<cosos[i]<<endl;
-	cout<<"COSOACAMBIAR: "<<cosoacambiar<<endl;
-
-	for (i = 0; cosos[i] != '\0'; ++i) {
-		resultado = cosoacambiar;
-	}
-
-	cout<<"RESULTADO: "<<resultado<<endl;
-
-	return resultado;
-
-}
-
-void imprimirMapa(char **mapa, int tamanyoMapa) {
-	int x;
-	for (x = 0; x < tamanyoMapa; ++x) {
-		cout<<mapa[x]<<endl;
-	}
-}
-
-void crearMapa(int piso) {
-	int primeraPlaza;
-	if (piso == 1) {
-		primeraPlaza = 1;
-	} else if (piso == 2) {
-		primeraPlaza = 37;
-	} else if (piso == 3) {
-		primeraPlaza = 73;
-	}
-	int arNum[36];
-	int w;
-	for (w = 0; w < 36; ++w) {
-		arNum[w] = primeraPlaza;
-		primeraPlaza++;
-	}
-	/*
-	printf("  ==============================\n");
-	printf("//   [%i][%i][%i][%i][%i][%i]   \\\\ \n", arNum[0], arNum[1],
-			arNum[2], arNum[3], arNum[4], arNum[5]);
-	printf("||                              ||\n");
-	printf("||   [%i][%i][%i][%i][%i][%i]   ||\n", arNum[6], arNum[7], arNum[8],
-			arNum[9], arNum[10], arNum[11]);
-	printf("||   [%i][%i][%i][%i][%i][%i]   ||\n", arNum[12], arNum[13],
-			arNum[14], arNum[15], arNum[16], arNum[17]);
-	printf("||                              ||\n");
-	printf("||   [%i][%i][%i][%i][%i][%i]   ||\n", arNum[18], arNum[19],
-			arNum[20], arNum[21], arNum[22], arNum[23]);
-	printf("||   [%i][%i][%i][%i][%i][%i]   ||\n", arNum[24], arNum[25],
-			arNum[26], arNum[27], arNum[28], arNum[29]);
-	printf("||                              ||\n");
-	printf("\\\\   [%i][%i][%i][%i][%i][%i]   //\n", arNum[30], arNum[31],
-			arNum[32], arNum[33], arNum[34], arNum[35]);
-	printf("  ==============================\n");
-	fflush(stdout);
-}
-
-void inicioMapa(int piso, char **map, int tamanyoMapa, Usuario u, sqlite3 *db) {
-	int opcion = 0;
-	cout<<"ESTA USTED EN EL PISO "<<piso<<", SELECCIONE UNA OPCION:"<<endl;
-
-	/*do {
-		//scanf("%i", &opcion);
-		switch (opcion) {
-		case 1:
-			if (piso != 3) {
-				piso++;
-				crearMapa(piso);
-				printf("1. Subir\n");
-				printf("2. Bajar\n");
-				printf("3. Volver\n");
-				fflush(stdout);
-			} else {
-				printf(
-						"Esta usted en la ultima planta, seleccione otra letra por favor: ");
-				fflush(stdout);
-				scanf("%i", &opcion);
-			}
-			break;
-		case 2:
-			if (piso != 1) {
-				piso--;
-				crearMapa(piso);
-				printf("1. Subir\n");
-				printf("2. Bajar\n");
-				printf("3. Volver\n");
-				fflush(stdout);
-
-			} else {
-				printf(
-						"Esta usted en la ultima planta, seleccione otra letra por favor: ");
-				fflush(stdout);
-				scanf("%i", &opcion);
-			}
-
-			break;
-		case 3:
-			inicioUsuario(u, db);
-
-			break;
-		default:
-			printf("CARACTER INVALIDO, SELECCIONE OTRA OPCION.");
-			fflush(stdout);
-			scanf("%i", &opcion);
-
-			break;
-		}
-		inicioMapa(piso, map, tamanyoMapa, u, db);
-
-	} while (0);
-
-}*/
-bool checkReserva(int plaza, sqlite3 *db){
+bool checkReserva(int plaza, sqlite3 *db) {
 	bool esCierto = false;
-	/*int tamanyoReserva = cuentaReservas(db);
-	Reserva *reservas = new Reserva[tamanyoReserva];
-	recogeReservas(reservas, db);*/
-	int tamanyoReserva = 5;
-	int reservas[] = {20, 22, 12, 3, 5};
+	int tamanyoReserva = cuentaReservas(db);
+	int *reservas = new int[tamanyoReserva];
+	recogeReservas(reservas, db, tamanyoReserva);
 	int var;
-	for (var = 0;  var < tamanyoReserva; ++ var) {
+	for (var = 0; var < tamanyoReserva; ++var) {
 		if (reservas[var] == plaza) {
 			esCierto = true;
+			return esCierto;
 		}
 	}
 	return esCierto;
 }
-void mapa(Usuario u, sqlite3 *db) {
 
-	string* map = new string[10];
+void printMapa(int piso, sqlite3 *db) {
+	vector<string> map;
 
-	int h;
-
-
-	map[0] = "  ===================\n";
-	map[1] = "// [ ][ ][ ][ ][ ][ ] \\\\ \n";
-	map[2] = "||                    ||\n";
-	map[3] = "|| [ ][ ][ ][ ][ ][ ] ||\n";
-	map[4] = "|| [ ][ ][ ][ ][ ][ ] ||\n";
-	map[5] = "||                    ||\n";
-	map[6] = "|| [ ][ ][ ][ ][ ][ ] ||\n";
-	map[7] = "|| [ ][ ][ ][ ][ ][ ] ||\n";
-	map[8] = "||                    ||\n";
-	map[9] = "\\\\ [ ][ ][ ][ ][ ][ ] //\n";
-	map[10] = "  ===================\n";
-
-	int piso = 1;
-	//crearMapa(piso);
-	/*printf("1. Subir\n");
-	printf("2. Bajar\n");
-	printf("3. Volver\n");
-	fflush(stdout);*/
-
-	//inicioMapa(piso, map, tamanyoMapa, u, db);
-
-
-
-	int primeraPlaza = 0;
-	int *numPlaza = new int[36];
-
-	int var;
-	for (var = 0; var < 36; ++var) {
-		numPlaza[var] = var;
+	map.push_back("  ===============================");
+	map.push_back("// [ ][ ][ ][ ][ ][ ]");
+	map.push_back("<-");
+	map.push_back("|| [ ][ ][ ][ ][ ][ ]");
+	map.push_back("|| [ ][ ][ ][ ][ ][ ]");
+	map.push_back("||  ->");
+	map.push_back("|| [ ][ ][ ][ ][ ][ ]");
+	map.push_back("|| [ ][ ][ ][ ][ ][ ]");
+	map.push_back("||                            <-");
+	map.push_back("\\\\ [ ][ ][ ][ ][ ][ ]");
+	map.push_back("  ===============================");
+	int plaza;
+	if (piso == 1) {
+		plaza = 0;
+	} else if (piso == 2) {
+		plaza = 37;
+	} else if (piso == 3) {
+		plaza = 73;
 	}
 
+	int numPlaza[36];
+
+	int y;
+	for (y = 0; y < 36; ++y) {
+		numPlaza[y] = plaza;
+		plaza++;
+	}
+	string prev;
+	string post;
+	string num;
+	string result;
 	int iteradorNumPlaza = 0;
+	unsigned int var;
 	for (var = 0; var < 11; ++var) {
-		int x = 0;
-		for (std::string::iterator it=map[var].begin(); it!=map[var].end(); ++it) {
-			 if (map[var][x] == '[' && map[var][x + 2] == ']'){
-				 if(checkReserva(x, db) == true){
-					 map[var][x] = 'x';
-					 iteradorNumPlaza++;
-				 }
-				 else
-				 {
-					 map[var][x] == numPlaza[iteradorNumPlaza];
-				 }
-				 iteradorNumPlaza++;
-			 }
-			 x++;
+		result.clear();
+		if (var == 0 || var == 2 || var == 5 || var == 8 || var == 10) {
 
+			result = map[var];
+		} else {
+			unsigned int x;
+			for (x = 0; x != map[var].length(); ++x) {
+				if (map[var][x] == '[' && map[var][x + 2] == ']') {
+					if (checkReserva(numPlaza[iteradorNumPlaza], db) == true) {
+						prev = map[var].substr(0, x + 1);
+						post = map[var].substr(x + 2);
+
+						map[var] = prev + "X" + post;
+						result = prev + "X" + post;
+					} else {
+						prev = map[var].substr(0, x + 1);
+						post = map[var].substr(x + 2);
+						num = to_string(numPlaza[iteradorNumPlaza]);
+
+						map[var] = prev + num + post;
+						result = prev + num + post;
+					}
+					iteradorNumPlaza++;
+				}
+			}
 		}
-		cout<<map[var];
+		cout << map[var] << endl;
 	}
-	/*
-	 int k = 0;
-	 int j;
-	 char numChar;
-	 do {
-	 j = 0;
-	 do {
-	 if (map[k][j] == '[' && map[k][j + 2] == ']') {
-	 //itoa(numPlaza, numChar, 10);
-	 //printf("%c", numChar); fflush(stdout);
-	 //printf("\n\n", cambiador(map[k], numChar));
-	 printf("%c", map[k][j + 1]);  fflush(stdout);
-	 map[k][j + 1] = numChar; //esto no funciona
-	 printf(" hey "); fflush(stdout);
-	 numPlaza++;
-	 j++;
-	 } else {
-	 j++;
-	 }
-	 } while (map[k][j] != '\0');
-
-	 k++;
-	 } while (k < tamanyoMapa);
-
-	 */
+	cout << "X marca una parcela ocupada" << endl;
+}
+void ventanaMapa(int piso, sqlite3 *db, Usuario *u) {
+	char opcion;
+	int pisoNuevo = piso;
+	printMapa(piso, db);
+	cout << "s - subir piso" << endl << "b- bajar piso" << endl << "v - volver"
+			<< endl << "Se encuentra usted en la planta " << piso
+			<< " inserte un caracter para seleccionar una accion: ";
+	cin >> opcion;
+	if (opcion == 's' && piso != 3) {
+		pisoNuevo++;
+		ventanaMapa(pisoNuevo, db, u);
+	} else if (opcion == 'b' && piso != 1) {
+		pisoNuevo--;
+		ventanaMapa(pisoNuevo, db, u);
+	} else if (opcion == 's' && piso == 3) {
+		cout << "Se encuentra en el último piso, por favor intentelo de nuevo"
+				<< endl;
+		ventanaMapa(pisoNuevo, db, u);
+	} else if (opcion == 'b' && piso == 1) {
+		cout << "Se encuentra en el primer piso, por favor intentelo de nuevo"
+				<< endl;
+		ventanaMapa(pisoNuevo, db, u);
+	} else if(opcion == 'v'){
+		inicioUsuario(u, db);
+	} else {
+		cout << "Carácter invalido" << endl;
+		ventanaMapa(pisoNuevo, db, u);
+	}
 }
