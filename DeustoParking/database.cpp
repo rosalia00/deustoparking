@@ -1,7 +1,7 @@
 extern "C" {
 #include "sqlite3.h"
-#include "reserva.h"
 }
+#include "reserva.h"
 #include "usuario.h"
 #include <stdio.h>
 #include <string.h>
@@ -48,13 +48,13 @@ void recogeReservas(int *listaNum, sqlite3 *db, int tamanyo) {
 	}
 
 	int i = 0;
-	do{
-	resultado = sqlite3_step(stmt);
-	if (resultado == SQLITE_ROW) {
-		listaNum[i] = sqlite3_column_double(stmt, 0);
-	}
-	i++;
-	}while(resultado == SQLITE_ROW);
+	do {
+		resultado = sqlite3_step(stmt);
+		if (resultado == SQLITE_ROW) {
+			listaNum[i] = sqlite3_column_double(stmt, 0);
+		}
+		i++;
+	} while (resultado == SQLITE_ROW);
 
 	resultado = sqlite3_finalize(stmt);
 	if (resultado != SQLITE_OK) {
@@ -304,4 +304,40 @@ int baseDatosUsuarioRegistrar(sqlite3 *db, Usuario *u) {
 	}
 
 	return SQLITE_OK;
+}
+
+Usuario inicioSesion(sqlite3 *db, char *dni) {
+	Usuario usuario;
+	sqlite3_stmt *stmt;
+
+	char sql[] = "SELECT * FROM USUARIO WHERE DNI=?";
+
+	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+	if (resultado != SQLITE_OK) {
+		cout << "Error preparando la declaración (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	resultado = sqlite3_bind_text(stmt, 1, dni);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro id" << endl << sqlite3_errmsg(db)
+				<< endl;
+		return resultado;
+	}
+
+	resultado = sqlite3_step(stmt);
+	if (resultado == SQLITE_ROW) {
+		usuario = sqlite3_column_double(stmt, 0);
+	}
+
+	resultado = sqlite3_finalize(stmt);
+	if (resultado != SQLITE_OK) {
+		cout << "Error terminando la declaracion (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+	cout << usuario;
+
+	return usuario;
 }
