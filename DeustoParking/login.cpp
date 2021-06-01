@@ -8,6 +8,7 @@
 extern "C"{
 #include "sqlite3.h"
 }
+using namespace std;
 
 void loggearse(sqlite3 *db) {
 	char *dni;
