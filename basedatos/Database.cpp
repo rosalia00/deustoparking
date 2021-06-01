@@ -349,21 +349,23 @@ int baseDatosUsuarioRegistrar(sqlite3 *db, Usuario *u) {
 	return SQLITE_OK;
 }
 
-void inicioSesion(sqlite3 *db, char *dni, Usuario *usuario) {
+int inicioSesion(sqlite3 *db, char *dni, Usuario *usuario) {
 	sqlite3_stmt *stmt;
-
+	cout<<"entro";
 	char sql[] = "SELECT * FROM USUARIO WHERE DNI = ?";
 
 	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
 	if (resultado != SQLITE_OK) {
 		cout << "Error preparando la declaración (SELECT)" << endl
 				<< sqlite3_errmsg(db) << endl;
+		return resultado;
 	}
 
 	resultado = sqlite3_bind_text(stmt, 1, dni, strlen(dni), SQLITE_STATIC);
 	if (resultado != SQLITE_OK) {
 		cout << "Error uniendo el parametro id" << endl << sqlite3_errmsg(db)
 				<< endl;
+		return resultado;
 	}
 
 	resultado = sqlite3_step(stmt);
@@ -373,15 +375,19 @@ void inicioSesion(sqlite3 *db, char *dni, Usuario *usuario) {
 		usuario->apellido = (char*) sqlite3_column_text(stmt, 2);
 		usuario->telefono = sqlite3_column_int(stmt, 3);
 		usuario->tarjeta = sqlite3_column_int(stmt, 4);
-		usuario->contrasenya = (char*) sqlite3_column_text(stmt, 5);
+		usuario->contrasenya =  (char*)sqlite3_column_text(stmt, 5);
+
 		usuario->tipo = (char*) sqlite3_column_text(stmt, 6);
 		usuario->matricula = (char*) sqlite3_column_text(stmt, 7);
 	}
+	cout<<endl<<usuario->contrasenya<<endl;
 
 	resultado = sqlite3_finalize(stmt);
 	if (resultado != SQLITE_OK) {
 		cout << "Error terminando la declaracion (SELECT)" << endl
 				<< sqlite3_errmsg(db) << endl;
+		return resultado;
 	}
 
+	return SQLITE_OK;
 }
