@@ -315,34 +315,33 @@ Usuario inicioSesion(sqlite3 *db, char *dni) {
 	Usuario usuario;
 	sqlite3_stmt *stmt;
 
-	char sql[] = "SELECT * FROM USUARIO WHERE DNI=?";
+	char sql[] = "SELECT * FROM USUARIO WHERE DNI = ?";
 
-//	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
-//	if (resultado != SQLITE_OK) {
-//		cout << "Error preparando la declaración (SELECT)" << endl
-//				<< sqlite3_errmsg(db) << endl;
-//		return resultado;
-//	}
-//
-//	resultado = sqlite3_bind_text(stmt, 1, dni);
-//	if (resultado != SQLITE_OK) {
-//		cout << "Error uniendo el parametro id" << endl << sqlite3_errmsg(db)
-//				<< endl;
-//		return resultado;
-//	}
-//
+	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+	if (resultado != SQLITE_OK) {
+		cout << "Error preparando la declaración (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return usuario;
+	}
+
+	resultado = sqlite3_bind_text(stmt, 1, dni, strlen(dni), SQLITE_STATIC);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro id" << endl << sqlite3_errmsg(db)
+				<< endl;
+		return usuario;
+	}
+
 //	resultado = sqlite3_step(stmt);
 //	if (resultado == SQLITE_ROW) {
 //		usuario = sqlite3_column_double(stmt, 0);
 //	}
-//
-//	resultado = sqlite3_finalize(stmt);
-//	if (resultado != SQLITE_OK) {
-//		cout << "Error terminando la declaracion (SELECT)" << endl
-//				<< sqlite3_errmsg(db) << endl;
-//		return resultado;
-//	}
-//	cout << usuario;
+
+	resultado = sqlite3_finalize(stmt);
+	if (resultado != SQLITE_OK) {
+		cout << "Error terminando la declaracion (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return usuario;
+	}
 
 	return usuario;
 }

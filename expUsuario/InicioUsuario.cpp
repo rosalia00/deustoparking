@@ -8,6 +8,7 @@ extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
 #include "../persona/Usuario.h"
+#include "../reserva/Reserva.h"
 #include <string.h>
 #include "InicioUsuario.h"
 #include "Mapa.h"
@@ -39,8 +40,8 @@ void inicioUsuario(Usuario *u, sqlite3 *db) {
 		letra = tolower(letra);
 
 		if (letra == 'p') {
-//			fflush(stdin);
-//			reservacion(u, db);
+			fflush(stdin);
+			reservacion(u, db);
 		} else if (letra == 'm') {
 			fflush(stdin);
 			ventanaMapa(1, db, u);

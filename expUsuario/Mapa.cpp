@@ -12,6 +12,7 @@ extern "C" {
 #include "../persona/Usuario.h"
 #include <bits/stdc++.h>
 #include <string.h>
+#include "InicioUsuario.h"
 #include "Mapa.h"
 #include <iostream>
 using namespace std;
@@ -20,7 +21,7 @@ bool checkReserva(int plaza, sqlite3 *db) {
 	bool esCierto = false;
 	int tamanyoReserva = cuentaReservas(db);
 	int *reservas = new int[tamanyoReserva];
-//	recogeReservas(reservas, db, tamanyoReserva);
+	recogeReservas(reservas, db, tamanyoReserva);
 	int var;
 	for (var = 0; var < tamanyoReserva; ++var) {
 		if (reservas[var] == plaza) {
@@ -121,7 +122,7 @@ void ventanaMapa(int piso, sqlite3 *db, Usuario *u) {
 				<< endl;
 		ventanaMapa(pisoNuevo, db, u);
 	} else if (opcion == 'v') {
-//		inicioUsuario(u, db);
+		inicioUsuario(u, db);
 	} else {
 		cout << "Carácter invalido" << endl;
 		ventanaMapa(pisoNuevo, db, u);

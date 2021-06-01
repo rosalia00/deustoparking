@@ -14,7 +14,7 @@
 
 int cuentaReservas(sqlite3 *db);
 int administrarBono(sqlite3 *db, float precio, int opcion);
-void recogeReservas(Reserva*, sqlite3 *db, int tamanyo);
+void recogeReservas(int *listaNum, sqlite3 *db, int tamanyo);
 int guardarTicket(sqlite3 *db, Reserva *res);
 int baseDatosUsuarioRegistrar(sqlite3 *db, Usuario *u);
 Usuario inicioSesion(sqlite3 *db, char *dni);
