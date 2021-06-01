@@ -14,51 +14,39 @@ extern "C" {
 #include <windows.h>
 #include <stdio.h>
 #include <ctype.h>
+#include "iostream"
+using namespace std;
 
 void inicio(sqlite3 *db) {
-	bool valido = true;
-	system("cls");
-	fflush (stdout);
-	printf("\n == BIENVENIDO A DEUSTOPARKING == \n");
-	printf("\n");
-	printf("r -> Registrarse.\n");
-	printf("i -> Iniciar sesion.\n");
-	printf("s -> Salir del programa. \n");
-	printf("\n");
-	printf("INTRODUZCA LA LETRA: ");
-	fflush(stdout);
+
+	int opcion;
+
+	cout << "--- BIENVENIDO A DEUSTO PARKING ---" << endl;
+	cout << "1. Registrarse." << endl << "2. Iniciar sesion." << endl
+			<< "3. Administrador." << endl << "4. Salir del programa." << endl;
 
 	do {
+		cout << "Elija la opción: ";
+		cin >> opcion;
+	} while (opcion < 1 || opcion > 3);
 
-		char letra;
-		char linea[5];
-		cleanStdIn(linea, 5);
-		fgets(linea, 5, stdin);
-		sscanf(linea, "%c", &letra);
-		letra = tolower(letra);
-		switch (letra) {
-		case 'i':
-			loggearse(db);
-			valido = false;
-			break;
-		case 'r':
-			registrarse(db);
-			valido = false;
-			break;
-		case 's':
-			printf("\nSaliendo del programa en 3 segundos...");
-			fflush(stdout);
-			Sleep(3000);
-			exit(1);
-		default:
-			printf("\nLETRA INVALIDA INSERTE UNO NUEVO: ");
-			fflush(stdout);
-			sscanf(linea, "%c", &letra);
-			letra = tolower(letra);
-			valido = true;
-			break;
-		}
-	} while (valido);
-	system("cls");
+	switch (opcion) {
+	case 1:
+		registrarse(db);
+		break;
+	case 2:
+		loggearse(db);
+		break;
+	case 3:
+		break;
+	case 4:
+		cout << "Saliendo del programa...";
+		Sleep(3000);
+		exit(1);
+		break;
+	default:
+		break;
+	}
+
 }
 

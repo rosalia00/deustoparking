@@ -24,8 +24,8 @@ typedef struct {
 	int plaza;
 } Reserva;
 
-float tipoBono(sqlite3 *db, Usuario *u, Reserva *res);
+void tipoBono(sqlite3 *db, Usuario *u, Reserva *res);
 void ticket(Reserva *res, sqlite3 *db);
-Reserva reservacion(Usuario *u, sqlite3 *db);
+void reservacion(Usuario *u, sqlite3 *db);
 
 #endif /* RESERVA_RESERVA_H_ */

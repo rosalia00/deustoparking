@@ -9,54 +9,36 @@ extern "C" {
 }
 #include "../persona/Usuario.h"
 #include "../reserva/Reserva.h"
-#include <string.h>
 #include "InicioUsuario.h"
 #include "Mapa.h"
 #include "iostream"
 using namespace std;
 
-void cleanStdIn(char *str, int max_line) {
-	if ((strlen(str) == max_line - 1) && (str[max_line - 2] != '\n'))
-		while (getchar() != '\n')
-			;
-}
-
 void inicioUsuario(Usuario *u, sqlite3 *db) {
-	cout << endl << "--- BIENVENIDO " << u->getNombre() << "---" << endl;
-	printf("\n");
-	printf("p -> Reservar plazas.\n");
-	printf("m -> Mapa.\n");
-	printf("r -> Reservas. (Aún no disponible)\n");
-	printf("\n");
-	printf("INTRODUZCA LA LETRA: ");
-	fflush(stdout);
+
+	int opcion;
+
+	cout << endl << "--- BIENVENIDO " << u->getNombre() << " ---" << endl;
+	cout << "1. Reservar plazas." << endl << "2. Mapa." << endl
+			<< "3. Reservas." << endl;
 
 	do {
-		char letra;
-		char linea[5];
-		cleanStdIn(linea, 5);
-		fgets(linea, 5, stdin);
-		letra = getchar();
-		letra = tolower(letra);
+		cout << "Elija la opción: ";
+		cin >> opcion;
+	} while (opcion < 1 || opcion > 3);
 
-		if (letra == 'p') {
-			fflush(stdin);
-			reservacion(u, db);
-		} else if (letra == 'm') {
-			fflush(stdin);
-			ventanaMapa(1, db, u);
-		} else if (letra == 'r') {
-		} else {
-			printf("LETRA INVALIDA INSERTE UNO NUEVO: ");
-			fflush(stdout);
-
-			char linea[5];
-			cleanStdIn(linea, 5);
-			fgets(linea, 5, stdin);
-			sscanf(linea, "%c", &letra);
-			letra = tolower(letra);
-		}
-	} while (0);
+	switch (opcion) {
+	case 1:
+		reservacion(u, db);
+		break;
+	case 2:
+		ventanaMapa(1, db, u);
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
 
 }
 

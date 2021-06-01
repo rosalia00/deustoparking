@@ -7,6 +7,7 @@
 extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
+#include "../basedatos/Database.h"
 #include "../persona/Usuario.h"
 #include "../expUsuario/InicioUsuario.h"
 #include <cstring>
@@ -14,51 +15,52 @@ extern "C" {
 #include <iostream>
 using namespace std;
 
-Reserva reservacion(Usuario *u, sqlite3 *db) {
+void reservacion(Usuario *u, sqlite3 *db) {
 
-	Reserva res;
+	Reserva *res;
 
-	int plaza = 0;
-	int horaI = 0;
-	int horaF = 0;
-	int fid = 0;
-	int fim = 0;
-	int fia = 0;
-	int ffd = 0;
-	int ffm = 0;
-	int ffa = 0;
+	int plaza;
+	int horaI;
+	char *cHoraI = new char[4];
+	int horaF;
+	char *cHoraF = new char[4];
+	int fid;
+	int fim;
+	int fia;
+	int ffd;
+	int ffm;
+	int ffa;
 
-	int eleccion;
-	int c;
+	int opcion;
+	char *tecla = new char[1];
 
-	printf("PLAZA: ");
-	fflush(stdout);
-	scanf("%i", &plaza);
+	cout << "PLAZA: ";
+	cin >> plaza;
+	res->plaza = plaza;
 
-	printf("HORA INICIO: ");
-	fflush(stdout);
-	scanf("%i", &horaI);
+	cout << "HORA INICIO: ";
+	cin >> horaI;
+	itoa(horaI, cHoraI, 10);
+	res->datainicio = cHoraI;
 
-	printf("HORA FINAL: ");
-	fflush(stdout);
-	scanf("%i", &horaF);
+	cout << "HORA FINAL: ";
+	cin >> horaF;
+	itoa(horaF, cHoraF, 10);
+	res->datafin = cHoraF;
 
-	printf("FECHA INICIO DIA: ");
-	fflush(stdout);
-	scanf("%i", &fid);
+	cout << "FECHA INICIO DIA: ";
+	cin >> fid;
 
-	printf("FECHA INICIO MES: ");
-	fflush(stdout);
-	scanf("%i", &fim);
+	cout << "FECHA INICIO MES: ";
+	cin >> fim;
 
-	printf("FECHA INICIO ANYO: ");
-	fflush(stdout);
-	scanf("%i", &fia);
+	cout << "FECHA INICIO ANYO: ";
+	cin >> fia;
 
-	char datainFinal[11];
-	char datain1[3];
-	char datain2[3];
-	char datain3[5];
+	char *datainFinal = new char[9];
+	char *datain1 = new char[2];
+	char *datain2 = new char[2];
+	char *datain3 = new char[2];
 
 	itoa(fid, datain1, 10);
 	itoa(fim, datain2, 10);
@@ -70,22 +72,19 @@ Reserva reservacion(Usuario *u, sqlite3 *db) {
 	strcat(datainFinal, "-");
 	strcat(datainFinal, datain3);
 
-	printf("FECHA FIN DIA: ");
-	fflush(stdout);
-	scanf("%i", &ffd);
+	cout << "FECHA FIN DIA: ";
+	cin >> ffd;
 
-	printf("FECHA FIN MES: ");
-	fflush(stdout);
-	scanf("%i", &ffm);
+	cout << "FECHA FIN MES: ";
+	cin >> ffm;
 
-	printf("FECHA FIN ANYO: ");
-	fflush(stdout);
-	scanf("%i", &ffa);
+	cout << "FECHA FIN ANYO: ";
+	cin >> ffa;
 
-	char datafinFinal[11];
-	char datafin1[3];
-	char datafin2[3];
-	char datafin3[5];
+	char *datafinFinal = new char[9];
+	char *datafin1 = new char[2];
+	char *datafin2 = new char[2];
+	char *datafin3 = new char[2];
 
 	itoa(ffd, datafin1, 10);
 	itoa(ffm, datafin2, 10);
@@ -97,44 +96,35 @@ Reserva reservacion(Usuario *u, sqlite3 *db) {
 	strcat(datafinFinal, "-");
 	strcat(datafinFinal, datafin3);
 
-	res.apellido = u->getApellido();
-	res.datafin = datafinFinal;
-	res.datainicio = datainFinal;
-	res.dni = u->getdni();
-	res.nombre = u->getNombre();
-	res.plaza = plaza;
-	res.precio = tipoBono(db, u, &res);
-	fflush(stdin);
-	res.tarjeta = u->getTarjeta();
-	system("cls");
-	do {
-		printf(
-				"\n1. Guardar e imprimir ticket.\n2. Cancelar y volver a inicio.\n");
-		printf("\nElija opcion: ");
-		fflush(stdout);
-		cin >> eleccion;
-		switch (eleccion) {
-		case 1:
-			fflush(stdout);
-			ticket(&res, db);
-			printf("\nPulse una tecla para volver al menu principal... ");
-			fflush(stdout);
-			cin >> c;
-			inicioUsuario(u, db);
-			break;
-		case 2:
-			fflush(stdin);
-			inicioUsuario(u, db);
-			break;
-		default:
-			printf("CARACTER INVALIDO. INSERTE UNO NUEVO: ");
-			fflush(stdout);
-			fflush(stdin);
-			cin >> c;
-			break;
-		}
-	} while (eleccion <= 0 || eleccion >= 3);
+	res->apellido = u->getApellido();
+	res->datafin = datafinFinal;
+	res->datainicio = datainFinal;
+	res->dni = u->getdni();
+	res->nombre = u->getNombre();
+	res->plaza = plaza;
+	tipoBono(db, u, res);
+	res->tarjeta = u->getTarjeta();
 
-	return res;
+	cout << "1. Guardar e imprimir el ticket." << endl
+			<< "2. Cancelar y volver al inicio.";
+
+	do {
+		cout << "Elija la opción: ";
+		cin >> opcion;
+	} while (opcion < 1 || opcion > 2);
+
+	switch (opcion) {
+	case 1:
+		ticket(res, db);
+		cout << "Pulse una tecla para volver al menu principal...";
+		cin >> tecla;
+		inicioUsuario(u, db);
+		break;
+	case 2:
+		inicioUsuario(u, db);
+		break;
+	default:
+		break;
+	}
 }
 

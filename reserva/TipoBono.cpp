@@ -15,7 +15,7 @@ extern "C" {
 #include <iostream>
 using namespace std;
 
-float tipoBono(sqlite3 *db, Usuario *u, Reserva *res) {
+void tipoBono(sqlite3 *db, Usuario *u, Reserva *res) {
 
 	float precioSem = recogerPrecioBono(db, 1);
 	float precioMen = recogerPrecioBono(db, 2);
@@ -42,15 +42,15 @@ float tipoBono(sqlite3 *db, Usuario *u, Reserva *res) {
 	switch (opcion) {
 	case 1:
 		res->bono = 1;
-		return precioSem;
+		res->precio = precioSem;
 		break;
 	case 2:
 		res->bono = 2;
-		return precioMen;
+		res->precio = precioMen;
 		break;
 	case 3:
 		res->bono = 3;
-		return precioAnu;
+		res->precio = precioAnu;
 		break;
 	default:
 		break;
