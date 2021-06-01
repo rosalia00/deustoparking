@@ -222,6 +222,44 @@ int guardarTicket(sqlite3 *db, Reserva *res) {
 	return SQLITE_OK;
 }
 
+/* --- RECOGER EL PRECIO DE LOS BONOS --- */
+float recogerPrecioBono(sqlite3 *db, int num) {
+	float precio;
+	sqlite3_stmt *stmt;
+
+	char sql[] = "SELECT PRECIO FROM BONO WHERE ID=?";
+
+	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+	if (resultado != SQLITE_OK) {
+		cout << "Error preparando la declaración (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 1, num);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro id" << endl << sqlite3_errmsg(db)
+				<< endl;
+		return resultado;
+	}
+
+	do {
+		resultado = sqlite3_step(stmt);
+		if (resultado == SQLITE_ROW) {
+			precio = sqlite3_column_double(stmt, 0);
+		}
+	} while (resultado == SQLITE_ROW);
+
+	resultado = sqlite3_finalize(stmt);
+	if (resultado != SQLITE_OK) {
+		cout << "Error terminando la declaracion (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	return precio;
+}
+
 /* --- GUARDAR USUARIOS EN LA BASE DE DATOS AL REGISTRAR --- */
 int baseDatosUsuarioRegistrar(sqlite3 *db, Usuario *u) {
 

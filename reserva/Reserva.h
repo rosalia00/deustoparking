@@ -19,11 +19,12 @@ typedef struct {
 	char *datainicio;
 	char *datafin;
 	float precio;
+	int bono;
 	char *matricula;
 	int plaza;
 } Reserva;
 
-float tipoBono();
+float tipoBono(sqlite3 *db, Usuario *u, Reserva *res);
 void ticket(Reserva *res, sqlite3 *db);
 Reserva reservacion(Usuario *u, sqlite3 *db);
 

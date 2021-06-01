@@ -4,59 +4,55 @@
  *  Created on: 1 jun. 2021
  *      Author: Tyler de Mier
  */
-
+extern "C" {
+#include "../basedatos/Sqlite3.h"
+}
+#include "../basedatos/Database.h"
 #include <stdio.h>
 #include <conio.h>
+#include <string.h>
 #include "Reserva.h"
+#include <iostream>
+using namespace std;
 
-float tipoBono() {
-	int op = 0;
-	float tipoBono;
-	int c = 0;
+float tipoBono(sqlite3 *db, Usuario *u, Reserva *res) {
+
+	float precioSem = recogerPrecioBono(db, 1);
+	float precioMen = recogerPrecioBono(db, 2);
+	float precioAnu = recogerPrecioBono(db, 3);
+
+	int opcion;
+
+	if (strcmp(u->getTipo(), "Profesor") == 0) {
+		precioSem = precioSem + (precioSem * 0.2);
+		precioMen = precioMen + (precioMen * 0.2);
+		precioAnu = precioAnu + (precioAnu * 0.2);
+	}
+
+	cout << "Tipos de Bonos:" << endl;
+	cout << "1. Bono Semanal: " << precioSem << "€" << endl;
+	cout << "2. Bono Mensual: " << precioMen << "€" << endl;
+	cout << "3. Bono Anual: " << precioAnu << "€" << endl;
 
 	do {
-		printf("\nTIPOS DE BONO: ");
-		printf("\n1. Bono Semanal Alumnado: 62,99 Euros. ");
-		printf("\n2. Bono Semana Profesorado: 75,59 Euros. ");
-		printf("\n3. Bono Mensual Alumnado: 209,99 Euros. ");
-		printf("\n4. Bono Mensual Profesorado: 251,99 Euros. ");
-		printf("\n5. Bono Anual Alumnado: 1.641,99 Euros. ");
-		printf("\n6. Bono Anual Profesorado: 1.970,39 Euros. ");
-		printf("\nElija tipo de Bono: ");
-		fflush(stdout);
-		scanf("%d", &op);
-		switch (op) {
-		case 1:
-			tipoBono = 62.99;
-			return tipoBono;
-			break;
-		case 2:
-			tipoBono = 75.59;
-			return tipoBono;
-			break;
-		case 3:
-			tipoBono = 209.99;
-			return tipoBono;
-			break;
-		case 4:
-			tipoBono = 251.99;
-			return tipoBono;
-			break;
-		case 5:
-			tipoBono = 1641.99;
-			return tipoBono;
-			break;
-		case 6:
-			tipoBono = 1970.39;
-			return tipoBono;
-			break;
-		default:
-			printf(
-					"\nOpcion Erronea. Debe elegir entre 1 - 6. Pulse una tecla para continuar... \n");
-			//limpia teclado
-			fflush(stdin);
-			c = getch();
-			break;
-		}
-	} while (op <= 0 || op >= 7);
+		cout << "Elija el tipo de bono: ";
+		cin >> opcion;
+	} while (opcion < 1 || opcion > 3);
+
+	switch (opcion) {
+	case 1:
+		res->bono = 1;
+		return precioSem;
+		break;
+	case 2:
+		res->bono = 2;
+		return precioMen;
+		break;
+	case 3:
+		res->bono = 3;
+		return precioAnu;
+		break;
+	default:
+		break;
+	}
 }

@@ -103,7 +103,7 @@ Reserva reservacion(Usuario *u, sqlite3 *db) {
 	res.dni = u->getdni();
 	res.nombre = u->getNombre();
 	res.plaza = plaza;
-	res.precio = tipoBono();
+	res.precio = tipoBono(db, u, &res);
 	fflush(stdin);
 	res.tarjeta = u->getTarjeta();
 	system("cls");
@@ -112,7 +112,7 @@ Reserva reservacion(Usuario *u, sqlite3 *db) {
 				"\n1. Guardar e imprimir ticket.\n2. Cancelar y volver a inicio.\n");
 		printf("\nElija opcion: ");
 		fflush(stdout);
-		scanf("%i", &eleccion);
+		cin >> eleccion;
 		switch (eleccion) {
 		case 1:
 			fflush(stdout);

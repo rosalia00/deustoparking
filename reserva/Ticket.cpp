@@ -9,7 +9,7 @@ extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
 #include "../basedatos/Database.h"
-#include "reserva.h"
+#include "Reserva.h"
 #include <stdio.h>
 
 void ticket(Reserva *res, sqlite3 *db) {
