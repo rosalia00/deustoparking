@@ -15,6 +15,7 @@ extern "C" {
 using namespace std;
 
 void ticket(Reserva *res, sqlite3 *db) {
+	cout<<"entra";
 
 //	ofstream freserva("ticket.dat");
 //

@@ -380,7 +380,6 @@ int inicioSesion(sqlite3 *db, char *dni, Usuario *usuario) {
 		usuario->tipo = (char*) sqlite3_column_text(stmt, 6);
 		usuario->matricula = (char*) sqlite3_column_text(stmt, 7);
 	}
-	cout<<endl<<usuario->contrasenya<<endl;
 
 	resultado = sqlite3_finalize(stmt);
 	if (resultado != SQLITE_OK) {

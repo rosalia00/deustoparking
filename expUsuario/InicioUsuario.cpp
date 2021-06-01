@@ -8,7 +8,7 @@ extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
 #include "../persona/Usuario.h"
-#include "../reserva/Reserva.h"
+#include "../reserva/Reservar.h"
 #include "InicioUsuario.h"
 #include "Mapa.h"
 #include "iostream"
