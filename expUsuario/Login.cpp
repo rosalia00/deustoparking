@@ -16,20 +16,21 @@ extern "C" {
 using namespace std;
 
 void loggearse(sqlite3 *db) {
-	char *dni;
+	char *dni = new char[9];
 	cout << "Introduzca su DNI: ";
 	cin >> dni;
 
-	char *contrasenya;
+	char *contrasenya = new char[32];
 	cout << "Introduzca su contrasenya: ";
 	cin >> contrasenya;
 
-	Usuario u = inicioSesion(db, dni);
-
-	if (u.contrasenya == contrasenya) {
-		inicioUsuario(&u, db);
+	Usuario *u;
+	inicioSesion(db, dni, u);
+	cout<<dni<<" "<<u->dni<<endl;
+	if (u->contrasenya == contrasenya) {
+		inicioUsuario(u, db);
 	} else {
-		cout << "Contraseña o usuario inexistente por favor intentelo de nuevo";
+		cout << "Contraseña o usuario inexistente por favor intentelo de nuevo"<<endl;
 		loggearse(db);
 	}
 }

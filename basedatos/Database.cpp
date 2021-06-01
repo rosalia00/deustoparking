@@ -56,7 +56,7 @@ void recogeReservas(int *listaNum, sqlite3 *db, int tamanyo) {
 	do {
 		resultado = sqlite3_step(stmt);
 		if (resultado == SQLITE_ROW) {
-			listaNum[i] = sqlite3_column_double(stmt, 0);
+			listaNum[i] = sqlite3_column_double(stmt, 7);
 		}
 		i++;
 	} while (resultado == SQLITE_ROW);
@@ -349,8 +349,7 @@ int baseDatosUsuarioRegistrar(sqlite3 *db, Usuario *u) {
 	return SQLITE_OK;
 }
 
-Usuario inicioSesion(sqlite3 *db, char *dni) {
-	Usuario usuario;
+void inicioSesion(sqlite3 *db, char *dni, Usuario *usuario) {
 	sqlite3_stmt *stmt;
 
 	char sql[] = "SELECT * FROM USUARIO WHERE DNI = ?";
@@ -359,27 +358,30 @@ Usuario inicioSesion(sqlite3 *db, char *dni) {
 	if (resultado != SQLITE_OK) {
 		cout << "Error preparando la declaración (SELECT)" << endl
 				<< sqlite3_errmsg(db) << endl;
-		return usuario;
 	}
 
 	resultado = sqlite3_bind_text(stmt, 1, dni, strlen(dni), SQLITE_STATIC);
 	if (resultado != SQLITE_OK) {
 		cout << "Error uniendo el parametro id" << endl << sqlite3_errmsg(db)
 				<< endl;
-		return usuario;
 	}
 
-//	resultado = sqlite3_step(stmt);
-//	if (resultado == SQLITE_ROW) {
-//		usuario = sqlite3_column_double(stmt, 0);
-//	}
+	resultado = sqlite3_step(stmt);
+	if (resultado == SQLITE_ROW) {
+		usuario->dni = (char*) sqlite3_column_text(stmt, 0);
+		usuario->nombre = (char*) sqlite3_column_text(stmt, 1);
+		usuario->apellido = (char*) sqlite3_column_text(stmt, 2);
+		usuario->telefono = sqlite3_column_int(stmt, 3);
+		usuario->tarjeta = sqlite3_column_int(stmt, 4);
+		usuario->contrasenya = (char*) sqlite3_column_text(stmt, 5);
+		usuario->tipo = (char*) sqlite3_column_text(stmt, 6);
+		usuario->matricula = (char*) sqlite3_column_text(stmt, 7);
+	}
 
 	resultado = sqlite3_finalize(stmt);
 	if (resultado != SQLITE_OK) {
 		cout << "Error terminando la declaracion (SELECT)" << endl
 				<< sqlite3_errmsg(db) << endl;
-		return usuario;
 	}
 
-	return usuario;
 }
