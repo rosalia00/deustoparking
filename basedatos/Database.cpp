@@ -369,23 +369,29 @@ int inicioSesion(sqlite3 *db, char *dni, Usuario *usuario) {
 
 	resultado = sqlite3_step(stmt);
 	if (resultado == SQLITE_ROW) {
-		usuario->apellido = new char[sizeof((char*) sqlite3_column_text(stmt, 2))+1];
-		usuario->contrasenya = new char[sizeof((char*) sqlite3_column_text(stmt, 5))+1];
-		usuario->dni = new char[sizeof((char*) sqlite3_column_text(stmt, 0))+1];
-		usuario->matricula = new char[sizeof((char*) sqlite3_column_text(stmt, 7))+1];
-		usuario->nombre = new char[sizeof((char*) sqlite3_column_text(stmt, 1))+1];
+		usuario->apellido =
+				new char[sizeof((char*) sqlite3_column_text(stmt, 2)) + 1];
+		usuario->contrasenya = new char[sizeof((char*) sqlite3_column_text(stmt,
+				5)) + 1];
+		usuario->dni =
+				new char[sizeof((char*) sqlite3_column_text(stmt, 0)) + 1];
+		usuario->matricula = new char[sizeof((char*) sqlite3_column_text(stmt,
+				7)) + 1];
+		usuario->nombre = new char[sizeof((char*) sqlite3_column_text(stmt, 1))
+				+ 1];
 		usuario->tarjeta = 0;
-		usuario->tipo = new char[sizeof((char*) sqlite3_column_text(stmt, 6))+1];
+		usuario->tipo = new char[sizeof((char*) sqlite3_column_text(stmt, 6))
+				+ 1];
 		usuario->telefono = 0;
 
-		strcpy(usuario->dni, (char*) sqlite3_column_text(stmt, 0));
-		strcpy(usuario->nombre, (char*) sqlite3_column_text(stmt, 1));
-		strcpy(usuario->apellido, (char*) sqlite3_column_text(stmt, 2));
+		usuario->setdni((char*) sqlite3_column_text(stmt, 0));
+		usuario->setNombre((char*) sqlite3_column_text(stmt, 1));
+		usuario->setApellido((char*) sqlite3_column_text(stmt, 2));
 		usuario->telefono = sqlite3_column_int(stmt, 3);
 		usuario->tarjeta = sqlite3_column_int(stmt, 4);
-		strcpy(usuario->contrasenya, (char*) sqlite3_column_text(stmt, 5));
-		strcpy(usuario->tipo, (char*) sqlite3_column_text(stmt, 6));
-		strcpy(usuario->matricula, (char*) sqlite3_column_text(stmt, 7));
+		usuario->setContrasenya((char*) sqlite3_column_text(stmt, 5));
+		usuario->setTipo((char*) sqlite3_column_text(stmt, 6));
+		usuario->setMatricula((char*) sqlite3_column_text(stmt, 7));
 	}
 
 	resultado = sqlite3_finalize(stmt);

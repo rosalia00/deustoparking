@@ -19,17 +19,9 @@ void loggearse(sqlite3 *db) {
 	cin >> contrasenya;
 
 	Usuario u;
-	u.apellido = new char[24];
-	u.contrasenya = new char[24];
-	u.dni = new char[24];
-	u.matricula= new char[24];
-	u.nombre= new char[24];
-	u.tarjeta= 0;
-	u.tipo= new char[24];
-	u.telefono=0;
 	inicioSesion(db, dni, &u);
 
-	cout<<endl<<u.contrasenya<<" "<<contrasenya;
+	cout<<endl<<u.getContrasenya()<<" "<<contrasenya<<endl;
 	if (strcmp(u.getContrasenya(), contrasenya)) {
 		inicioUsuario(&u, db);
 	} else {

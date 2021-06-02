@@ -79,15 +79,15 @@ char* Persona::getContrasenya() {
 }
 
 void Persona::setdni(char *dni) {
-	this->dni = dni;
+	strcpy(this->dni, dni);
 }
 
 void Persona::setNombre(char *nombre) {
-	this->nombre = nombre;
+	strcpy(this->nombre, nombre);
 }
 
 void Persona::setApellido(char *apellido) {
-	this->apellido = apellido;
+	strcpy(this->apellido, apellido);
 }
 
 void Persona::setTelefono(int telefono) {
@@ -99,5 +99,5 @@ void Persona::setTarjeta(int tarjeta) {
 }
 
 void Persona::setContrasenya(char *contrasenya) {
-	this->contrasenya = contrasenya;
+	strcpy(this->contrasenya, contrasenya);
 }
