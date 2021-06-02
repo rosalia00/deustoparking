@@ -4,13 +4,13 @@
  *  Created on: 1 jun. 2021
  *      Author: Tyler de Mier
  */
-
+#include <iostream>
 #include "Sqlite3.h"
 #include "../persona/Usuario.h"
 #include "../reserva/Reserva.h"
 #include <stdio.h>
 #include <string.h>
-#include <iostream>
+#include <string>
 using namespace std;
 
 int cuentaReservas(sqlite3 *db) {
@@ -66,6 +66,51 @@ void recogeReservas(int *listaNum, sqlite3 *db, int tamanyo) {
 		cout << "Error terminando la declaracion (SELECT)" << endl
 				<< sqlite3_errmsg(db) << endl;
 	}
+}
+
+/* RECOGER RESERVAS DE USUARIOS*/
+void printReservas(sqlite3 *db, Usuario *u) {
+	sqlite3_stmt *stmt;
+
+	char sql[] = "SELECT FECHAI, FECHAF, PLAZA FROM RESERVA WHERE DNI = ?";
+
+	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+	if (resultado != SQLITE_OK) {
+		cout << "Error preparando la declaración (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+	}
+
+	resultado = sqlite3_bind_text(stmt, 1, u->dni, strlen(u->dni),
+	SQLITE_STATIC);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro dni" << endl << sqlite3_errmsg(db)
+				<< endl;
+	}
+
+	char *fechai = new char[100];
+	char *fechaf = new char[100];
+	int plaza;
+	int num = 1;
+
+	do {
+		resultado = sqlite3_step(stmt);
+		if (resultado == SQLITE_ROW) {
+			strcpy(fechai, (char*) sqlite3_column_text(stmt, 0));
+			strcpy(fechaf, (char*) sqlite3_column_text(stmt, 1));
+			plaza = sqlite3_column_int(stmt, 2);
+			cout << "RESERVA " << num << ":" << endl << "Fecha inicio: "
+					<< fechai << endl << "Fecha fin: " << fechaf << endl
+					<< "Plaza: " << endl;
+			++num;
+		}
+	} while (resultado == SQLITE_ROW);
+
+	resultado = sqlite3_finalize(stmt);
+	if (resultado != SQLITE_OK) {
+		cout << "Error terminando la declaracion (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+	}
+
 }
 
 /* --- ADMINISTRAR BONOS --- */
@@ -127,7 +172,7 @@ int guardarTicket(sqlite3 *db, Reserva *res) {
 	sqlite3_stmt *stmt;
 
 	char sql[] =
-			"INSERT INTO RESERVA (MATRICULA, FECHAI, FECHAF, PLAZA, DNI, NOMBRE, APELLIDO, TARJETA, PRECIO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			"INSERT INTO RESERVA (DNI, NOMBRE, APELLIDO, MATRICULA, FECHAI, FECHAF, PLAZA, TARJETA, PRECIO, BONO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
 	if (resultado != SQLITE_OK) {
@@ -161,7 +206,8 @@ int guardarTicket(sqlite3 *db, Reserva *res) {
 	}
 
 	resultado = sqlite3_bind_text(stmt, 4, res->matricula,
-			strlen(res->matricula), SQLITE_STATIC);
+			strlen(res->matricula),
+			SQLITE_STATIC);
 	if (resultado != SQLITE_OK) {
 		cout << "Error uniendo el parametro matricula" << endl
 				<< sqlite3_errmsg(db) << endl;
@@ -169,7 +215,8 @@ int guardarTicket(sqlite3 *db, Reserva *res) {
 	}
 
 	resultado = sqlite3_bind_text(stmt, 5, res->datainicio,
-			strlen(res->datainicio), SQLITE_STATIC);
+			strlen(res->datainicio),
+			SQLITE_STATIC);
 	if (resultado != SQLITE_OK) {
 		cout << "Error uniendo el parametro fecha inicio" << endl
 				<< sqlite3_errmsg(db) << endl;
@@ -199,6 +246,13 @@ int guardarTicket(sqlite3 *db, Reserva *res) {
 	}
 
 	resultado = sqlite3_bind_double(stmt, 9, res->precio);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro precio" << endl
+				<< sqlite3_errmsg(db) << endl;
+		return resultado;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 10, res->bono);
 	if (resultado != SQLITE_OK) {
 		cout << "Error uniendo el parametro precio" << endl
 				<< sqlite3_errmsg(db) << endl;

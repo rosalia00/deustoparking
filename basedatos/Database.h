@@ -19,5 +19,6 @@ int guardarTicket(sqlite3 *db, Reserva *res);
 float recogerPrecioBono(sqlite3 *db, int num);
 int baseDatosUsuarioRegistrar(sqlite3 *db, Usuario *u);
 int inicioSesion(sqlite3 *db, char *dni, Usuario *usuario);
+void printReservas(sqlite3 *db, Usuario *u);
 
 #endif /* BASEDATOS_DATABASE_H_ */

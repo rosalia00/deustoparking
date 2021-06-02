@@ -12,6 +12,7 @@ extern "C" {
 #include "../persona/Usuario.h"
 #include "Registrar.h"
 #include "InicioUsuario.h"
+#include <string>
 #include <iostream>
 using namespace std;
 
