@@ -1,10 +1,3 @@
-/*
- * Login.cpp
- *
- *  Created on: 1 jun. 2021
- *      Author: Tyler de Mier
- */
-
 extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
@@ -22,14 +15,21 @@ void loggearse(sqlite3 *db) {
 	cin >> dni;
 
 	char *contrasenya = new char[32];
-	cout<<"holiwis";
 	cout << "Introduzca su contrasenya: ";
 	cin >> contrasenya;
-	cout<<"hola";
-	Usuario u = Usuario();
 
+	Usuario u;
+	u.apellido = new char[24];
+	u.contrasenya = new char[24];
+	u.dni = new char[24];
+	u.matricula= new char[24];
+	u.nombre= new char[24];
+	u.tarjeta= 0;
+	u.tipo= new char[24];
+	u.telefono=0;
 	inicioSesion(db, dni, &u);
 
+	cout<<endl<<u.contrasenya<<" "<<contrasenya;
 	if (strcmp(u.getContrasenya(), contrasenya)) {
 		inicioUsuario(&u, db);
 	} else {
