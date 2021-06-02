@@ -12,7 +12,6 @@
 #include "../persona/Usuario.h"
 #include "Reserva.h"
 
-void tipoBono(sqlite3 *db, Usuario *u, Reserva *res);
-void reservacion(Usuario *u, sqlite3 *db);
+Reserva reservacion(Usuario *u, sqlite3 *db);
 
 #endif /* RESERVA_RESERVAR_H_ */

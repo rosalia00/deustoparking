@@ -56,3 +56,59 @@
 //		break;
 //	}
 //}
+
+extern "C" {
+#include "../basedatos/Sqlite3.h"
+}
+#include "../basedatos/Database.h"
+#include "../persona/Usuario.h"
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+#include "Reserva.h"
+#include <iostream>
+using namespace std;
+
+float tipoBono(sqlite3 *db, Usuario *u) {
+
+	float precioSem;
+	float precioMen;
+	float precioAnu;
+
+	int opcion;
+
+	if (u->getTipo() == "Estudiante") {
+		precioSem = recogerPrecioBono(db, 1);
+		precioMen = recogerPrecioBono(db, 2);
+		precioAnu = recogerPrecioBono(db, 3);
+
+	} else if (u->getTipo() == "Profesor") {
+		precioSem = recogerPrecioBono(db, 1) + (recogerPrecioBono(db, 1) * 0.2);
+		precioMen = recogerPrecioBono(db, 2) + (recogerPrecioBono(db, 1) * 0.2);
+		precioAnu = recogerPrecioBono(db, 3) + (recogerPrecioBono(db, 1) * 0.2);
+	}
+
+	cout << "Tipos de Bonos:" << endl;
+	cout << "1. Bono Semanal: " << precioSem << "€" << endl;
+	cout << "2. Bono Mensual: " << precioMen << "€" << endl;
+	cout << "3. Bono Anual: " << precioAnu << "€" << endl;
+
+	do {
+		cout << "Elija el tipo de bono: ";
+		cin >> opcion;
+	} while (opcion < 1 || opcion > 3);
+
+	switch (opcion) {
+	case 1:
+		return precioSem;
+		break;
+	case 2:
+		return precioMen;
+		break;
+	case 3:
+		return precioAnu;
+		break;
+	default:
+		break;
+	}
+}
