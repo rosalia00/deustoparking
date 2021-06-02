@@ -22,10 +22,12 @@ void loggearse(sqlite3 *db) {
 	cin >> dni;
 
 	char *contrasenya = new char[32];
+	cout<<"holiwis";
 	cout << "Introduzca su contrasenya: ";
 	cin >> contrasenya;
+	cout<<"hola";
+	Usuario u = Usuario();
 
-	Usuario u;
 	inicioSesion(db, dni, &u);
 
 	if (strcmp(u.getContrasenya(), contrasenya)) {

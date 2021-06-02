@@ -351,7 +351,7 @@ int baseDatosUsuarioRegistrar(sqlite3 *db, Usuario *u) {
 
 int inicioSesion(sqlite3 *db, char *dni, Usuario *usuario) {
 	sqlite3_stmt *stmt;
-	cout<<"entro";
+	cout << "entro";
 	char sql[] = "SELECT * FROM USUARIO WHERE DNI = ?";
 
 	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
@@ -370,15 +370,15 @@ int inicioSesion(sqlite3 *db, char *dni, Usuario *usuario) {
 
 	resultado = sqlite3_step(stmt);
 	if (resultado == SQLITE_ROW) {
-		usuario->dni = (char*) sqlite3_column_text(stmt, 0);
-		usuario->nombre = (char*) sqlite3_column_text(stmt, 1);
-		usuario->apellido = (char*) sqlite3_column_text(stmt, 2);
+		strcpy(usuario->dni, (char*) sqlite3_column_text(stmt, 0));
+		strcpy(usuario->nombre, (char*) sqlite3_column_text(stmt, 1));
+		strcpy(usuario->apellido, (char*) sqlite3_column_text(stmt, 2));
 		usuario->telefono = sqlite3_column_int(stmt, 3);
 		usuario->tarjeta = sqlite3_column_int(stmt, 4);
-		usuario->contrasenya =  (char*)sqlite3_column_text(stmt, 5);
+		strcpy(usuario->contrasenya, (char*) sqlite3_column_text(stmt, 5));
 
-		usuario->tipo = (char*) sqlite3_column_text(stmt, 6);
-		usuario->matricula = (char*) sqlite3_column_text(stmt, 7);
+		strcpy(usuario->tipo, (char*) sqlite3_column_text(stmt, 6));
+		strcpy(usuario->matricula, (char*) sqlite3_column_text(stmt, 7));
 	}
 
 	resultado = sqlite3_finalize(stmt);
