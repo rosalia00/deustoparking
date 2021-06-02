@@ -27,7 +27,7 @@ void inicioUsuario(Usuario *u, sqlite3 *db) {
 	do {
 		cout << "Elija la opción: ";
 		cin >> opcion;
-	} while (opcion < 1 || opcion > 3);
+	} while (opcion < 1 || opcion > 4);
 
 	switch (opcion) {
 	case 1:

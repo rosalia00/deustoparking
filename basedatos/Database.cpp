@@ -100,7 +100,7 @@ void printReservas(sqlite3 *db, Usuario *u) {
 			plaza = sqlite3_column_int(stmt, 2);
 			cout << "RESERVA " << num << ":" << endl << "Fecha inicio: "
 					<< fechai << endl << "Fecha fin: " << fechaf << endl
-					<< "Plaza: " << endl;
+					<< "Plaza: " << plaza << endl;
 			++num;
 		}
 	} while (resultado == SQLITE_ROW);
