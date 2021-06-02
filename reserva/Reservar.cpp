@@ -277,7 +277,7 @@ Reserva reservacion(Usuario *u, sqlite3 *db) {
 	res.dni = u->getdni();
 	res.nombre = u->getNombre();
 	res.plaza = plaza;
-	res.precio = tipoBono(db, u);
+	tipoBono(db, u, &res);
 	fflush(stdin);
 	res.tarjeta = u->getTarjeta();
 
