@@ -10,6 +10,6 @@
 
 #include "basedatos/Sqlite3.h";
 
-void inicio(sqlite3 *db);
+void inicio(sqlite3 *db,char* tipo);
 
 #endif /* INICIO_H_ */

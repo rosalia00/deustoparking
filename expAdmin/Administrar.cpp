@@ -12,16 +12,17 @@ extern "C" {
 #include <string>
 #include <cstring>
 #include "Administrar.h"
+#include "InicioAdmin.h"
 using namespace std;
 
-void administrarInicio(sqlite3 *db) {
+void administrarInicio(sqlite3 *db, Administrador *a) {
 	int opcion;
 	float precio;
 	int eleccion;
 	string nombre;
 	cout << "--- ADMINISTRAR BONOS ---" << endl << endl << "Tipo de bono:"
 			<< endl << "1. Semanal" << endl << "2. Mensual" << endl
-			<< "3. Trimestral" << endl << "4. Anual" << endl << endl;
+			<< "3. Trimestral" << endl << "4. Anual" << endl << "5. Volver"<< endl;
 	do {
 		cout << "Seleccione el bono a cambiar: ";
 		cin >> opcion;
@@ -39,6 +40,9 @@ void administrarInicio(sqlite3 *db) {
 		break;
 	case 4:
 		nombre = "Anual";
+		break;
+	case 5:
+		inicioAdmin(a, db);
 		break;
 	default:
 		break;

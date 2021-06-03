@@ -10,6 +10,6 @@
 
 #include "../basedatos/Sqlite3.h"
 
-void administrarInicio(sqlite3 *db);
+void administrarInicio(sqlite3 *db, Administrador *a);
 
 #endif /* EXPADMIN_ADMINISTRAR_H_ */

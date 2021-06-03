@@ -6,6 +6,7 @@ extern "C" {
 #include "../persona/Administrador.h"
 #include <string.h>
 #include "LoginAdmin.h"
+#include "InicioAdmin.h"
 using namespace std;
 
 void loggearseAdmin(sqlite3 *db) {
@@ -21,6 +22,7 @@ void loggearseAdmin(sqlite3 *db) {
 	inicioSesionAdmin(db, dni, a);
 
 	if (strcmp(a->getContrasenya(), contrasenya) == 0) {
+		inicioAdmin(a, db);
 	} else {
 		cout << "Contraseña o usuario inexistente por favor intentelo de nuevo"
 				<< endl;

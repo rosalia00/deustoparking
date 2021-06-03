@@ -482,7 +482,7 @@ int inicioSesion(sqlite3 *db, char *dni, Usuario *usuario) {
 
 int inicioSesionAdmin(sqlite3 *db, char *dni, Administrador *admin) {
 	sqlite3_stmt *stmt;
-	char sql[] = "SELECT * FROM USUARIO WHERE DNI = ?";
+	char sql[] = "SELECT * FROM ADMINISTRADOR WHERE DNI = ?";
 
 	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
 	if (resultado != SQLITE_OK) {
