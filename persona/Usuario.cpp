@@ -53,5 +53,5 @@ void Usuario::setTipo(char *tipo) {
 }
 
 void Usuario::setMatricula(char *matricula) {
-	strcpy(this->matricula, matricula);
+	this->matricula = matricula;
 }

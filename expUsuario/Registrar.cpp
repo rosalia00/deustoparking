@@ -76,9 +76,10 @@ void registrarse(sqlite3 *db) {
 	cin >> matricula;
 	u->setMatricula(matricula);
 
-	cout << endl << "USUARIO REGISTRADO" << endl
-			<< "--- --- ----------- --- ---" << endl;
 	baseDatosUsuarioRegistrar(db, u);
 	inicioUsuario(u, db);
+
+	cout << endl << "USUARIO REGISTRADO" << endl
+			<< "--- --- ----------- --- ---" << endl;
 }
 
