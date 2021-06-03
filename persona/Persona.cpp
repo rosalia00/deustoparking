@@ -4,11 +4,9 @@
  *  Created on: 1 jun. 2021
  *      Author: Tyler de Mier
  */
-
-#include "Persona.h"
-
-#include <string.h>
 #include <iostream>
+#include "Persona.h"
+#include <string.h>
 using namespace std;
 
 Persona::Persona(const char *dni, char *nombre, char *apellido, int telefono,

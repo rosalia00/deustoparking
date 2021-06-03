@@ -4,10 +4,8 @@
  *  Created on: 1 jun. 2021
  *      Author: Tyler de Mier
  */
-
-#include "Administrador.h"
-
 #include <iostream>
+#include "Administrador.h"
 using namespace std;
 
 Administrador::Administrador(const char *dni, char *nombre, char *apellido,

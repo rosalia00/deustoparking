@@ -1,3 +1,4 @@
+#include <iostream>
 extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
@@ -6,7 +7,6 @@ extern "C" {
 #include <string.h>
 #include "InicioUsuario.h"
 #include "Login.h"
-#include <iostream>
 using namespace std;
 
 void loggearse(sqlite3 *db) {
@@ -24,7 +24,8 @@ void loggearse(sqlite3 *db) {
 	if (strcmp(u.getContrasenya(), contrasenya) == 0) {
 		inicioUsuario(&u, db);
 	} else {
-		cout << "Contraseña o usuario inexistente por favor intentelo de nuevo"<<endl;
+		cout << "Contraseña o usuario inexistente por favor intentelo de nuevo"
+				<< endl;
 		loggearse(db);
 	}
 }

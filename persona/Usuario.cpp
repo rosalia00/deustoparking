@@ -4,10 +4,8 @@
  *  Created on: 1 jun. 2021
  *      Author: Tyler de Mier
  */
-
-#include <string.h>
 #include <iostream>
-
+#include <string.h>
 #include "Usuario.h"
 using namespace std;
 

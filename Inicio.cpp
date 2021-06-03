@@ -4,6 +4,7 @@
  *  Created on: 1 jun. 2021
  *      Author: Tyler de Mier
  */
+#include "iostream"
 extern "C" {
 #include "basedatos/Sqlite3.h"
 }
@@ -14,7 +15,6 @@ extern "C" {
 #include <windows.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "iostream"
 using namespace std;
 
 void inicio(sqlite3 *db) {
@@ -28,7 +28,7 @@ void inicio(sqlite3 *db) {
 	do {
 		cout << "Elija la opción: ";
 		cin >> opcion;
-	} while (opcion < 1 || opcion > 3);
+	} while (opcion < 1 || opcion > 4);
 
 	switch (opcion) {
 	case 1:

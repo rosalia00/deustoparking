@@ -1,3 +1,4 @@
+#include <iostream>
 extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
@@ -7,7 +8,6 @@ extern "C" {
 #include <conio.h>
 #include <string.h>
 #include "Reserva.h"
-#include <iostream>
 using namespace std;
 
 void tipoBono(sqlite3 *db, Usuario *u, Reserva *res) {

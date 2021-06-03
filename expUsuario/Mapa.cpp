@@ -4,7 +4,7 @@
  *  Created on: 1 jun. 2021
  *      Author: Tyler de Mier
  */
-
+#include <iostream>
 extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
@@ -14,7 +14,6 @@ extern "C" {
 #include <string.h>
 #include "InicioUsuario.h"
 #include "Mapa.h"
-#include <iostream>
 using namespace std;
 
 bool checkReserva(int plaza, sqlite3 *db) {

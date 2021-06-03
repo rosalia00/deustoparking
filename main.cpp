@@ -4,12 +4,11 @@
  *  Created on: 1 jun. 2021
  *      Author: Tyler de Mier
  */
-
+#include "iostream"
 extern "C" {
 #include "basedatos/Sqlite3.h"
 }
 #include "inicio.h"
-#include <iostream>
 using namespace std;
 
 int main() {

@@ -4,6 +4,7 @@
  *  Created on: 1 jun. 2021
  *      Author: Tyler de Mier
  */
+#include <iostream>
 extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
@@ -12,7 +13,6 @@ extern "C" {
 #include "../reserva/Reservar.h"
 #include "InicioUsuario.h"
 #include "Mapa.h"
-#include "iostream"
 using namespace std;
 
 void inicioUsuario(Usuario *u, sqlite3 *db) {
