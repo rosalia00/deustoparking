@@ -18,11 +18,14 @@ void loggearse(sqlite3 *db) {
 	cout << "Introduzca su contrasenya: ";
 	cin >> contrasenya;
 
-	Usuario u;
-	inicioSesion(db, dni, &u);
+	Usuario *u = new Usuario();
+	inicioSesion(db, dni, u);
 
-	if (strcmp(u.getContrasenya(), contrasenya) == 0) {
-		inicioUsuario(&u, db);
+	cout << "DNI:" << u->getdni() << " Contrasenya:" << u->getContrasenya()
+			<< endl;
+
+	if (strcmp(u->getContrasenya(), contrasenya) == 0) {
+		inicioUsuario(u, db);
 	} else {
 		cout << "Contraseña o usuario inexistente por favor intentelo de nuevo"
 				<< endl;
