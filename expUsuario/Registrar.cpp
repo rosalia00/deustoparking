@@ -62,11 +62,11 @@ void registrarse(sqlite3 *db) {
 	char *tipoString = new char[11];
 	switch (opcion) {
 	case 1:
-		tipoString = "Estudiante";
+		tipoString = (char*)"Estudiante";
 		u->setTipo(tipoString);
 		break;
 	case 2:
-		tipoString = "Profesor";
+		tipoString = (char*)"Profesor";
 		u->setTipo(tipoString);
 		break;
 	}
