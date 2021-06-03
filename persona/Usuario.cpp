@@ -13,7 +13,6 @@ Usuario::Usuario(const char *dni, char *nombre, char *apellido, int telefono,
 		int tarjeta, char *contrasenya, char *tipo, char *matricula) :
 		Persona(dni, nombre, apellido, telefono, tarjeta, contrasenya) {
 
-	cout << endl << "Guardando el usuario..." << endl;
 	this->tipo = new char[strlen(tipo) + 1];
 	strcpy(this->tipo, tipo);
 	this->matricula = new char[strlen(matricula) + 1];
@@ -29,8 +28,8 @@ Usuario::Usuario(const Usuario &u) :
 
 Usuario::Usuario() :
 		Persona() {
-	this->tipo = "";
-	this->matricula = "";
+	this->tipo = '\0';
+	this->matricula = '\0';
 }
 
 Usuario::~Usuario() {

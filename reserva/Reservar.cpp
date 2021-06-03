@@ -173,8 +173,8 @@
 //}
 //
 
-
-extern "C"{
+#include <iostream>
+extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
 #include "../expUsuario/InicioUsuario.h"
@@ -185,112 +185,171 @@ extern "C"{
 #include <cstring>
 #include <stdio.h>
 #include <stdlib.h>
-#include <iostream>
 using namespace std;
 
-Reserva reservacion(Usuario *u, sqlite3 *db) {
+Reserva* reservacion(Usuario *u, sqlite3 *db) {
 
-	Reserva res;
+	Reserva *res = new Reserva();
 
 	int plaza = 0;
 	int horaI = 0;
 	int horaF = 0;
-	int fid = 0;
-	int fim = 0;
-	int fia = 0;
-	int ffd = 0;
-	int ffm = 0;
-	int ffa = 0;
+	char *fid = new char[3];
+	char *fim = new char[3];
+	char *fia = new char[5];
+	char *ffd = new char[3];
+	char *ffm = new char[3];
+	char *ffa = new char[5];
 
 	int eleccion;
 	int c;
 
-	printf("PLAZA: ");
-	fflush(stdout);
-	scanf("%i", &plaza);
+	cout << "PLAZA: ";
+	cin >> plaza;
+	res->setPlaza(plaza);
 
-	printf("HORA INICIO: ");
-	fflush(stdout);
-	scanf("%i", &horaI);
+	cout << "HORA INICIO: ";
+	cin >> horaI;
+	res->setHorainicio(horaI);
 
-	printf("HORA FINAL: ");
-	fflush(stdout);
-	scanf("%i", &horaF);
+	cout << "HORA FINAL: ";
+	cin >> horaF;
+	res->setHorafin(horaF);
 
-	printf("FECHA INICIO DIA: ");
-	fflush(stdout);
-	scanf("%i", &fid);
+	cout << "FECHA INICIO DIA: ";
+	cin >> fid;
 
-	printf("FECHA INICIO MES: ");
-	fflush(stdout);
-	scanf("%i", &fim);
+	cout << "FECHA INICIO MES: ";
+	cin >> fim;
 
-	printf("FECHA INICIO ANYO: ");
-	fflush(stdout);
-	scanf("%i", &fia);
+	cout << "FECHA INICIO ANYO: ";
+	cin >> fia;
 
-	char datainFinal[11];
-	char datain1[3];
-	char datain2[3];
-	char datain3[5];
+	char *datainFinal = new char[11];
 
-	itoa(fid, datain1, 10);
-	itoa(fim, datain2, 10);
-	itoa(fia, datain3, 10);
-
-	strcpy(datainFinal, datain1);
+	strcpy(datainFinal, fid);
 	strcat(datainFinal, "-");
-	strcat(datainFinal, datain2);
+	strcat(datainFinal, fim);
 	strcat(datainFinal, "-");
-	strcat(datainFinal, datain3);
+	strcat(datainFinal, fia);
 
-	printf("FECHA FIN DIA: ");
-	fflush(stdout);
-	scanf("%i", &ffd);
+	res->setDatainicio(datainFinal);
 
-	printf("FECHA FIN MES: ");
-	fflush(stdout);
-	scanf("%i", &ffm);
+	cout << "FECHA FIN DIA: ";
+	cin >> ffd;
 
-	printf("FECHA FIN ANYO: ");
-	fflush(stdout);
-	scanf("%i", &ffa);
+	cout << "FECHA FIN MES: ";
+	cin >> ffm;
 
-	char datafinFinal[11];
-	char datafin1[3];
-	char datafin2[3];
-	char datafin3[5];
+	cout << "FECHA FIN ANYO: ";
+	cin >> ffa;
 
-	itoa(ffd, datafin1, 10);
-	itoa(ffm, datafin2, 10);
-	itoa(ffa, datafin3, 10);
+	char *datafinFinal = new char[11];
 
-	strcpy(datafinFinal, datafin1);
+	strcpy(datafinFinal, ffd);
 	strcat(datafinFinal, "-");
-	strcat(datafinFinal, datafin2);
+	strcat(datafinFinal, ffm);
 	strcat(datafinFinal, "-");
-	strcat(datafinFinal, datafin3);
+	strcat(datafinFinal, ffa);
 
-	res.apellido = u->getApellido();
-	res.datafin = datafinFinal;
-	res.datainicio = datainFinal;
-	res.dni = u->getdni();
-	res.nombre = u->getNombre();
-	res.plaza = plaza;
-	tipoBono(db, u, &res);
-	fflush(stdin);
-	res.tarjeta = u->getTarjeta();
+	res->setDatafin(datafinFinal);
+
+//	printf("PLAZA: ");
+//	fflush(stdout);
+//	scanf("%i", &plaza);
+//
+//	printf("HORA INICIO: ");
+//	fflush(stdout);
+//	scanf("%i", &horaI);
+//
+//	printf("HORA FINAL: ");
+//	fflush(stdout);
+//	scanf("%i", &horaF);
+//
+//	printf("FECHA INICIO DIA: ");
+//	fflush(stdout);
+//	scanf("%i", &fid);
+//
+//	printf("FECHA INICIO MES: ");
+//	fflush(stdout);
+//	scanf("%i", &fim);
+//
+//	printf("FECHA INICIO ANYO: ");
+//	fflush(stdout);
+//	scanf("%i", &fia);
+//
+//	char datainFinal[11];
+//	char datain1[3];
+//	char datain2[3];
+//	char datain3[5];
+//
+//	itoa(fid, datain1, 10);
+//	itoa(fim, datain2, 10);
+//	itoa(fia, datain3, 10);
+//
+//	strcpy(datainFinal, datain1);
+//	strcat(datainFinal, "-");
+//	strcat(datainFinal, datain2);
+//	strcat(datainFinal, "-");
+//	strcat(datainFinal, datain3);
+//
+//	printf("FECHA FIN DIA: ");
+//	fflush(stdout);
+//	scanf("%i", &ffd);
+//
+//	printf("FECHA FIN MES: ");
+//	fflush(stdout);
+//	scanf("%i", &ffm);
+//
+//	printf("FECHA FIN ANYO: ");
+//	fflush(stdout);
+//	scanf("%i", &ffa);
+//
+//	char datafinFinal[11];
+//	char datafin1[3];
+//	char datafin2[3];
+//	char datafin3[5];
+//
+//	itoa(ffd, datafin1, 10);
+//	itoa(ffm, datafin2, 10);
+//	itoa(ffa, datafin3, 10);
+//
+//	strcpy(datafinFinal, datafin1);
+//	strcat(datafinFinal, "-");
+//	strcat(datafinFinal, datafin2);
+//	strcat(datafinFinal, "-");
+//	strcat(datafinFinal, datafin3);
+
+//
+//
+//	res.apellido = u->getApellido();
+//	res.datafin = datafinFinal;
+//	res.datainicio = datainFinal;
+//	res.dni = u->getdni();
+//	res.nombre = u->getNombre();
+//	res.plaza = plaza;
+//	tipoBono(db, u, &res);
+//	fflush(stdin);
+//	res.tarjeta = u->getTarjeta();
+
+	res->setApellido(u->getApellido());
+	res->setDni(u->getdni());
+	res->setNombre(u->getNombre());
+	tipoBono(db, u, res);
+	res->setMatricula(u->getMatricula());
+	res->setTarjeta(u->getTarjeta());
 
 	system("cls");
 	do {
-		printf("\n1. Guardar e imprimir ticket.\n2. Cancelar y volver a inicio.\n");
+		printf(
+				"\n1. Guardar e imprimir ticket.\n2. Cancelar y volver a inicio.\n");
 		printf("\nElija opcion: ");
 		fflush(stdout);
 		scanf("%i", &eleccion);
 		switch (eleccion) {
 		case 1:
 			fflush(stdout);
-			ticket(&res, db);
+			ticket(res, db);
 			printf("\nPulse una tecla para volver al menu principal... ");
 			fflush(stdout);
 			cin >> c;
