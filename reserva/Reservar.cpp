@@ -177,6 +177,7 @@
 extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
+#include "../basedatos/Database.h"
 #include "../expUsuario/InicioUsuario.h"
 #include "Reserva.h"
 #include "Ticket.h"
@@ -202,7 +203,7 @@ Reserva reservacion(Usuario *u, sqlite3 *db) {
 	char *ffa = new char[5];
 
 	int eleccion;
-	int c;
+	char *c = new char[2];
 
 	cout << "PLAZA: ";
 	cin >> plaza;
@@ -349,6 +350,7 @@ Reserva reservacion(Usuario *u, sqlite3 *db) {
 		switch (eleccion) {
 		case 1:
 			fflush(stdout);
+			guardarTicket(db, res);
 			ticket(res, db);
 			printf("\nPulse una tecla para volver al menu principal... ");
 			fflush(stdout);

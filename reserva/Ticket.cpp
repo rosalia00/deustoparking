@@ -71,8 +71,6 @@ void ticket(Reserva *res, sqlite3 *db) {
 		fclose(freserva);
 	}
 
-	guardarTicket(db, res);
-
 	printf("\n------ DATOS DE LA RESERVA ------\n");
 	printf("Nombre: %s\n", res->nombre);
 	printf("Apellido: %s\n", res->apellido);

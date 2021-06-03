@@ -103,7 +103,7 @@ void printReservas(sqlite3 *db, Usuario *u) {
 			plaza = sqlite3_column_int(stmt, 2);
 			strcpy(horain, (char*) sqlite3_column_text(stmt, 3));
 			strcpy(horafin, (char*) sqlite3_column_text(stmt, 4));
-			cout << "RESERVA " << num << ":" << endl << "Fecha inicio: "
+			cout << endl << "RESERVA " << num << ":" << endl << "Fecha inicio: "
 					<< fechai << endl << "Fecha fin: " << fechaf << endl
 					<< "Plaza: " << plaza << endl << "Hora de inicio: "
 					<< horain << endl << "Hora de fin: " << horafin << endl;

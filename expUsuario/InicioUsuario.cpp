@@ -37,7 +37,7 @@ void inicioUsuario(Usuario *u, sqlite3 *db) {
 		ventanaMapa(1, db, u);
 		break;
 	case 3:
-		cout << "Mostrando las reservas: " << endl;
+		cout << endl << "Mostrando las reservas: " << endl;
 		printReservas(db, u);
 		cout << endl
 				<< "Escribe cualquier letra para volver al menu de usuario: ";
