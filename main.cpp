@@ -20,7 +20,6 @@ int main() {
 		return resultado;
 	}
 
-
 	inicio(db);
 
 	return 0;
