@@ -28,4 +28,6 @@ void loggearse(sqlite3 *db) {
 				<< endl;
 		loggearse(db);
 	}
+	delete[] dni;
+	delete[] contrasenya;
 }
