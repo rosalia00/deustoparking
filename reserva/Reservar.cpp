@@ -340,7 +340,6 @@ Reserva reservacion(Usuario *u, sqlite3 *db) {
 	res->setMatricula(u->getMatricula());
 	res->setTarjeta(u->getTarjeta());
 
-	system("cls");
 	do {
 		printf(
 				"\n1. Guardar e imprimir ticket.\n2. Cancelar y volver a inicio.\n");

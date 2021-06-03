@@ -21,9 +21,6 @@ void loggearse(sqlite3 *db) {
 	Usuario *u = new Usuario();
 	inicioSesion(db, dni, u);
 
-	cout << "DNI:" << u->getdni() << " Contrasenya:" << u->getContrasenya()
-			<< endl;
-
 	if (strcmp(u->getContrasenya(), contrasenya) == 0) {
 		inicioUsuario(u, db);
 	} else {
