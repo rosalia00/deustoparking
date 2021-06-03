@@ -204,6 +204,8 @@ Reserva reservacion(Usuario *u, sqlite3 *db) {
 
 	int eleccion;
 	char *c = new char[2];
+	char *tecla = new char[2];
+	int opcion;
 
 	cout << "PLAZA: ";
 	cin >> plaza;
@@ -340,34 +342,57 @@ Reserva reservacion(Usuario *u, sqlite3 *db) {
 	res->setMatricula(u->getMatricula());
 	res->setTarjeta(u->getTarjeta());
 
+	cout << "1. Guardar e imprimir el ticket." << endl
+			<< "2. Cancelar y volver al inicio.";
+
 	do {
-		printf(
-				"\n1. Guardar e imprimir ticket.\n2. Cancelar y volver a inicio.\n");
-		printf("\nElija opcion: ");
-		fflush(stdout);
-		scanf("%i", &eleccion);
-		switch (eleccion) {
-		case 1:
-			fflush(stdout);
-			guardarTicket(db, res);
-			ticket(res, db);
-			printf("\nPulse una tecla para volver al menu principal... ");
-			fflush(stdout);
-			cin >> c;
-			inicioUsuario(u, db);
-			break;
-		case 2:
-			fflush(stdin);
-			inicioUsuario(u, db);
-			break;
-		default:
-			printf("CARACTER INVALIDO. INSERTE UNO NUEVO: ");
-			fflush(stdout);
-			fflush(stdin);
-			cin >> c;
-			break;
-		}
-	} while (eleccion <= 0 || eleccion >= 3);
+		cout << "Elija la opción: ";
+		cin >> opcion;
+	} while (opcion < 1 || opcion > 2);
+
+	switch (opcion) {
+	case 1:
+		guardarTicket(db, res);
+		ticket(res, db);
+		cout << "Pulse una tecla para volver al menu principal... ";
+		cin >> tecla;
+		inicioUsuario(u, db);
+		break;
+	case 2:
+		inicioUsuario(u, db);
+		break;
+	default:
+		break;
+	}
+
+//	do {
+//		printf(
+//				"\n1. Guardar e imprimir ticket.\n2. Cancelar y volver a inicio.\n");
+//		printf("\nElija opcion: ");
+//		fflush(stdout);
+//		scanf("%i", &eleccion);
+//		switch (eleccion) {
+//		case 1:
+//			fflush(stdout);
+//			guardarTicket(db, res);
+//			ticket(res, db);
+//			printf("\nPulse una tecla para volver al menu principal... ");
+//			fflush(stdout);
+//			cin >> c;
+//			inicioUsuario(u, db);
+//			break;
+//		case 2:
+//			fflush(stdin);
+//			inicioUsuario(u, db);
+//			break;
+//		default:
+//			printf("CARACTER INVALIDO. INSERTE UNO NUEVO: ");
+//			fflush(stdout);
+//			fflush(stdin);
+//			cin >> c;
+//			break;
+//		}
+//	} while (eleccion <= 0 || eleccion >= 3);
 
 	Reserva reserv;
 	return reserv;
