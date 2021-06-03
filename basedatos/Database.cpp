@@ -1,9 +1,4 @@
-/*
- * database.cpp
- *
- *  Created on: 1 jun. 2021
- *      Author: Tyler de Mier
- */
+
 #include <iostream>
 #include "Sqlite3.h"
 #include "../persona/Usuario.h"
@@ -44,7 +39,7 @@ int cuentaReservas(sqlite3 *db) {
 void recogeReservas(int *listaNum, sqlite3 *db, int tamanyo) {
 	sqlite3_stmt *stmt;
 
-	char sql[] = "SELECT PLAZA FROM RESERVA";
+	char sql[] = "SELECT * FROM RESERVA";
 
 	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
 	if (resultado != SQLITE_OK) {
@@ -56,7 +51,7 @@ void recogeReservas(int *listaNum, sqlite3 *db, int tamanyo) {
 	do {
 		resultado = sqlite3_step(stmt);
 		if (resultado == SQLITE_ROW) {
-			listaNum[i] = sqlite3_column_double(stmt, 7);
+			listaNum[i] = sqlite3_column_double(stmt, 6);
 		}
 		i++;
 	} while (resultado == SQLITE_ROW);

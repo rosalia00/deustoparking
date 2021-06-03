@@ -16,6 +16,7 @@ extern "C" {
 #include "Mapa.h"
 using namespace std;
 
+
 bool checkReserva(int plaza, sqlite3 *db) {
 	bool esCierto = false;
 	int tamanyoReserva = cuentaReservas(db);
@@ -24,10 +25,12 @@ bool checkReserva(int plaza, sqlite3 *db) {
 	int var;
 	for (var = 0; var < tamanyoReserva; ++var) {
 		if (reservas[var] == plaza) {
+
 			esCierto = true;
 			return esCierto;
 		}
 	}
+	delete[] reservas;
 	return esCierto;
 }
 
