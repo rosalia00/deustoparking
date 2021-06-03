@@ -502,7 +502,6 @@ int inicioSesionAdmin(sqlite3 *db, char *dni, Administrador *admin) {
 	char *apellido = new char[100];
 	char *contrasenya = new char[100];
 	char *dnito = new char[100];
-	char *matricula = new char[100];
 	int telefono;
 	int tarjeta;
 	int nss;
