@@ -187,7 +187,7 @@ extern "C" {
 #include <stdlib.h>
 using namespace std;
 
-Reserva* reservacion(Usuario *u, sqlite3 *db) {
+Reserva reservacion(Usuario *u, sqlite3 *db) {
 
 	Reserva *res = new Reserva();
 
@@ -368,5 +368,6 @@ Reserva* reservacion(Usuario *u, sqlite3 *db) {
 		}
 	} while (eleccion <= 0 || eleccion >= 3);
 
-	return res;
+	Reserva reserv;
+	return reserv;
 }

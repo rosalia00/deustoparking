@@ -37,12 +37,12 @@ Persona::Persona(const Persona &p) {
 }
 
 Persona::Persona() {
-	this->dni = '\0';
-	this->nombre = '\0';
-	this->apellido = '\0';
+	this->dni = "";
+	this->nombre = "";
+	this->apellido = "";
 	this->telefono = 0;
 	this->tarjeta = 0;
-	this->contrasenya = '\0';
+	this->contrasenya = "";
 }
 
 Persona::~Persona() {

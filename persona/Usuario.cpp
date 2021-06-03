@@ -28,8 +28,8 @@ Usuario::Usuario(const Usuario &u) :
 
 Usuario::Usuario() :
 		Persona() {
-	this->tipo = '\0';
-	this->matricula = '\0';
+	this->tipo = "";
+	this->matricula = "";
 }
 
 Usuario::~Usuario() {
