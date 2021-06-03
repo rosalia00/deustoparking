@@ -4,7 +4,7 @@
  *  Created on: 1 jun. 2021
  *      Author: Tyler de Mier
  */
-
+#include <iostream>
 extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
@@ -13,19 +13,18 @@ extern "C" {
 #include "Registrar.h"
 #include "InicioUsuario.h"
 #include <string>
-#include <iostream>
 using namespace std;
 
 void registrarse(sqlite3 *db) {
 	Usuario *u = new Usuario();
 	int opcion;
-	char *dni = (char*) malloc(10 * sizeof(char));
-	char *nombre = (char*) malloc(25 * sizeof(char));
-	char *apellido = (char*) malloc(50 * sizeof(char));
+	char *dni = new char[10];
+	char *nombre = new char[25];
+	char *apellido = new char[50];
 	int telefono;
 	int tarjeta;
-	char *contrasenya = (char*) malloc(20 * sizeof(char));
-	char *matricula = (char*) malloc(8 * sizeof(char));
+	char *contrasenya = new char[20];
+	char *matricula = new char[8];
 
 	cout << endl << "--- --- REGISTRARSE --- ---";
 
@@ -60,7 +59,7 @@ void registrarse(sqlite3 *db) {
 		cin >> opcion;
 	} while (opcion < 1 || opcion > 2);
 
-	char *tipoString = (char*) malloc(11 * sizeof(char));
+	char *tipoString = new char[11];
 	switch (opcion) {
 	case 1:
 		tipoString = "Estudiante";
