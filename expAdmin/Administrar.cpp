@@ -22,7 +22,8 @@ void administrarInicio(sqlite3 *db, Administrador *a) {
 	string nombre;
 	cout << "--- ADMINISTRAR BONOS ---" << endl << endl << "Tipo de bono:"
 			<< endl << "1. Semanal" << endl << "2. Mensual" << endl
-			<< "3. Trimestral" << endl << "4. Anual" << endl << "5. Volver"<< endl;
+			<< "3. Trimestral" << endl << "4. Anual" << endl << endl
+			<< "5. Volver" << endl;
 	do {
 		cout << "Seleccione el bono a cambiar: ";
 		cin >> opcion;

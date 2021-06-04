@@ -120,8 +120,6 @@ int administrarBono(sqlite3 *db, float precio, int opcion) {
 		return resultado;
 	}
 
-	cout << "Consulta SQL preparada (UPDATE)" << endl;
-
 	resultado = sqlite3_bind_double(stmt, 1, precio);
 	if (resultado != SQLITE_OK) {
 		cout << "Error uniendo el parametro precio" << endl
@@ -136,8 +134,6 @@ int administrarBono(sqlite3 *db, float precio, int opcion) {
 		return resultado;
 	}
 
-	cout << "Parametros insertados" << endl;
-
 	resultado = sqlite3_step(stmt);
 	if (resultado == SQLITE_OK) {
 		cout << "Error actualizando los datos." << endl << sqlite3_errmsg(db)
@@ -145,16 +141,12 @@ int administrarBono(sqlite3 *db, float precio, int opcion) {
 		return resultado;
 	}
 
-	cout << "Datos actualizados" << endl;
-
 	resultado = sqlite3_finalize(stmt);
 	if (resultado != SQLITE_OK) {
 		cout << "Error terminando la declaracion (UPDATE)" << endl
 				<< sqlite3_errmsg(db) << endl;
 		return resultado;
 	}
-
-	cout << "La declaración preparada ha terminado (UPDATE)" << endl;
 
 	return SQLITE_OK;
 }

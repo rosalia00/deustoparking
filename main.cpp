@@ -19,10 +19,9 @@ int main() {
 		cout << "Error abriendo la base de datos" << endl;
 		return resultado;
 	}
-	char* tipo = (char*)"Usuario";
+	char *tipo = (char*) "Usuario";
 	inicio(db, tipo);
 
 	return 0;
 }
-
 

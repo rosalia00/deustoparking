@@ -13,14 +13,15 @@ extern "C" {
 using namespace std;
 
 void inicio(sqlite3 *db, char *tipo) {
-	char* tipoNuevo;
+	char *tipoNuevo;
 	int opcion;
 
 	cout << "--- BIENVENIDO A DEUSTO PARKING ---" << endl;
 	cout << "1. Registrarse." << endl << "2. Iniciar sesion." << endl
-			<< "3. Eres "<< tipo<< ", cambiar" << endl << "4. Salir del programa." << endl;
+			<< "3. Eres " << tipo << ", cambiar" << endl
+			<< "4. Salir del programa." << endl;
 
-	if (strcmp(tipo, "Usuario")==0) {
+	if (strcmp(tipo, "Usuario") == 0) {
 		do {
 			cout << "Elija la opción: ";
 			cin >> opcion;
@@ -34,9 +35,9 @@ void inicio(sqlite3 *db, char *tipo) {
 			loggearse(db);
 			break;
 		case 3:
-			tipoNuevo = (char*)"Administrador";
-						inicio(db, tipoNuevo);
-						break;
+			tipoNuevo = (char*) "Administrador";
+			inicio(db, tipoNuevo);
+			break;
 		case 4:
 			cout << "Saliendo del programa...";
 			Sleep(3000);
@@ -45,7 +46,7 @@ void inicio(sqlite3 *db, char *tipo) {
 		default:
 			break;
 		}
-	} else if (strcmp(tipo, "Administrador")==0) {
+	} else if (strcmp(tipo, "Administrador") == 0) {
 		do {
 			cout << "Elija la opción: ";
 			cin >> opcion;
@@ -59,9 +60,9 @@ void inicio(sqlite3 *db, char *tipo) {
 			loggearseAdmin(db);
 			break;
 		case 3:
-			tipoNuevo = (char*)"Usuario";
-						inicio(db, tipoNuevo);
-						break;
+			tipoNuevo = (char*) "Usuario";
+			inicio(db, tipoNuevo);
+			break;
 		case 4:
 			cout << "Saliendo del programa...";
 			Sleep(3000);
