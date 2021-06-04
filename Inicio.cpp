@@ -18,14 +18,13 @@ void inicio(sqlite3 *db, char *tipo) {
 
 	cout << "--- BIENVENIDO A DEUSTO PARKING ---" << endl;
 	cout << "1. Registrarse." << endl << "2. Iniciar sesion." << endl
-			<< "3. Administrador." << endl << "4. Salir del programa." << endl;
-	cout << "Estas accediendo como " << tipo << " si desea cambiar pulse 5"
-			<< endl;
+			<< "3. Eres "<< tipo<< ", cambiar" << endl << "4. Salir del programa." << endl;
+
 	if (strcmp(tipo, "Usuario")==0) {
 		do {
 			cout << "Elija la opción: ";
 			cin >> opcion;
-		} while (opcion < 1 || opcion > 5);
+		} while (opcion < 1 || opcion > 4);
 
 		switch (opcion) {
 		case 1:
@@ -35,15 +34,13 @@ void inicio(sqlite3 *db, char *tipo) {
 			loggearse(db);
 			break;
 		case 3:
-			break;
+			tipoNuevo = (char*)"Administrador";
+						inicio(db, tipoNuevo);
+						break;
 		case 4:
 			cout << "Saliendo del programa...";
 			Sleep(3000);
 			exit(1);
-			break;
-		case 5:
-			tipoNuevo = (char*)"Administrador";
-			inicio(db, tipoNuevo);
 			break;
 		default:
 			break;
@@ -52,7 +49,7 @@ void inicio(sqlite3 *db, char *tipo) {
 		do {
 			cout << "Elija la opción: ";
 			cin >> opcion;
-		} while (opcion < 1 || opcion > 5);
+		} while (opcion < 1 || opcion > 4);
 
 		switch (opcion) {
 		case 1:
@@ -62,16 +59,15 @@ void inicio(sqlite3 *db, char *tipo) {
 			loggearseAdmin(db);
 			break;
 		case 3:
-			break;
+			tipoNuevo = (char*)"Usuario";
+						inicio(db, tipoNuevo);
+						break;
 		case 4:
 			cout << "Saliendo del programa...";
 			Sleep(3000);
 			exit(1);
 			break;
-		case 5:
-			tipoNuevo = (char*)"Administrador";
-			inicio(db, tipoNuevo);
-			break;
+
 		default:
 			break;
 		}
