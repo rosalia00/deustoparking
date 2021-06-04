@@ -1,9 +1,4 @@
-/*
- * persona.cpp
- *
- *  Created on: 1 jun. 2021
- *      Author: Tyler de Mier
- */
+
 #include <iostream>
 #include "Persona.h"
 #include <string.h>
@@ -37,12 +32,12 @@ Persona::Persona(const Persona &p) {
 }
 
 Persona::Persona() {
-	this->dni = "";
-	this->nombre = "";
-	this->apellido = "";
+	this->dni = (char*)"";
+	this->nombre = (char*)"";
+	this->apellido = (char*)"";
 	this->telefono = 0;
 	this->tarjeta = 0;
-	this->contrasenya = "";
+	this->contrasenya = (char*)"";
 }
 
 Persona::~Persona() {

@@ -1,9 +1,3 @@
-/*
- * Registrar.h
- *
- *  Created on: 1 jun. 2021
- *      Author: Tyler de Mier
- */
 
 #ifndef EXPUSUARIO_REGISTRAR_H_
 #define EXPUSUARIO_REGISTRAR_H_

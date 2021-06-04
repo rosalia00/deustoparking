@@ -1,15 +1,8 @@
-#include "iostream"
+#include <iostream>
 extern "C" {
 #include "basedatos/Sqlite3.h"
 }
-#include "persona/Usuario.h"
-#include "expUsuario/InicioUsuario.h"
-#include "expUsuario/Login.h"
-#include "expAdmin/LoginAdmin.h"
-#include "expUsuario/Registrar.h"
-#include <windows.h>
-#include <stdio.h>
-#include <ctype.h>
+
 using namespace std;
 
 #ifndef INICIO_H_

@@ -1,4 +1,13 @@
 #include "inicioAdmin.h"
+#include <iostream>
+extern "C" {
+#include "../basedatos/Sqlite3.h"
+}
+#include "../basedatos/Database.h"
+#include "../persona/Administrador.h"
+#include "Estadisticas.h"
+#include "Administrar.h"
+using namespace std;
 
 void inicioAdmin(Administrador *a, sqlite3 *db) {
 	int opcion;
@@ -17,7 +26,7 @@ void inicioAdmin(Administrador *a, sqlite3 *db) {
 		administrarInicio(db, a);
 		break;
 	case 2:
-		//aqui van las estadisticas
+		menuEstadisticas(db, a);
 		break;
 	case 3:
 		cout << "Saliendo del programa...";

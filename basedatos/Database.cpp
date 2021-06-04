@@ -1,5 +1,17 @@
 #include "Database.h"
 
+#include <iostream>
+extern "C" {
+#include "Sqlite3.h"
+}
+#include "../persona/Usuario.h"
+#include "../persona/Administrador.h"
+#include "../reserva/Reserva.h"
+#include <stdio.h>
+#include <string.h>
+#include <string>
+using namespace std;
+
 int cuentaReservas(sqlite3 *db) {
 	float numReserv;
 	sqlite3_stmt *stmt;
@@ -24,7 +36,6 @@ int cuentaReservas(sqlite3 *db) {
 				<< sqlite3_errmsg(db) << endl;
 		return resultado;
 	}
-
 	return numReserv;
 }
 
@@ -103,7 +114,6 @@ void printReservas(sqlite3 *db, Usuario *u) {
 		cout << "Error terminando la declaracion (SELECT)" << endl
 				<< sqlite3_errmsg(db) << endl;
 	}
-
 }
 
 /* --- ADMINISTRAR BONOS --- */
@@ -535,6 +545,152 @@ int inicioSesionAdmin(sqlite3 *db, char *dni, Administrador *admin) {
 				<< sqlite3_errmsg(db) << endl;
 		return resultado;
 	}
-
 	return SQLITE_OK;
+}
+
+//Estadisticas
+//Estadistica 1: Cantidad de bonos reservados de cada tipo
+void bonosNum(sqlite3 *db, int idBonos) {
+	int numBono;
+	sqlite3_stmt *stmt;
+	char sql[] = "SELECT COUNT(BONO) FROM RESERVA WHERE BONO=?;";
+
+	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+	if (resultado != SQLITE_OK) {
+		cout << "Error preparando la declaración (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 1, idBonos);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro opción" << endl
+				<< sqlite3_errmsg(db) << endl;
+	}
+
+	resultado = sqlite3_step(stmt);
+	if (resultado == SQLITE_ROW) {
+		if (idBonos == 1) {
+			cout << "Bono Semanal: ";
+		}
+		if (idBonos == 2) {
+			cout << "Bono Mensual: ";
+		}
+		if (idBonos == 3) {
+			cout << "Bono Anual: ";
+		}
+		numBono = sqlite3_column_int(stmt, 0);
+		cout << numBono << endl;
+	}
+
+	resultado = sqlite3_finalize(stmt);
+	if (resultado != SQLITE_OK) {
+		cout << "Error terminando la declaracion (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+	}
+
+}
+
+//Estadistica 2: Horas más concurridas
+void horasEntrada(sqlite3 *db, int hora1, int hora2) {
+	//SELECT HORAIN, MAX(contador) FROM (SELECT HORAIN, COUNT(HORAIN) contador FROM RESERVA WHERE HORAIN BETWEEN ? AND ? GROUP BY HORAIN)
+	int maxHora;
+	int numHoras;
+	sqlite3_stmt *stmt;
+	char sql[] =
+			"SELECT HORAIN, MAX(contador) FROM (SELECT HORAIN, COUNT(HORAIN) contador FROM RESERVA WHERE HORAIN BETWEEN ? AND ? GROUP BY HORAIN)";
+
+	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+	if (resultado != SQLITE_OK) {
+		cout << "Error preparando la declaración (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 1, hora1);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro opción" << endl
+				<< sqlite3_errmsg(db) << endl;
+	}
+
+	resultado = sqlite3_bind_int(stmt, 2, hora2);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro opción" << endl
+				<< sqlite3_errmsg(db) << endl;
+	}
+
+	resultado = sqlite3_step(stmt);
+	if (resultado == SQLITE_ROW) {
+		cout << "Desde las " << hora1 << " hasta las " << hora2
+				<< " la hora más concurrida es ";
+		maxHora = sqlite3_column_int(stmt, 0);
+		cout << maxHora << " con ";
+		numHoras = sqlite3_column_int(stmt, 1);
+		cout << numHoras << " horas reservadas." << endl;
+	}
+
+}
+
+//Estadisticas 3: Numero de cada tipo de usuarios
+void tipoUsuario(sqlite3 *db, char *tipo) {
+	int numUsuarios;
+	sqlite3_stmt *stmt;
+	char sql[] = "SELECT COUNT(TIPO) FROM USUARIO WHERE TIPO=?";
+
+	int resultado = sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+	if (resultado != SQLITE_OK) {
+		cout << "Error preparando la declaración (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+	}
+
+	resultado = sqlite3_bind_text(stmt, 1, tipo, strlen(tipo),
+	SQLITE_STATIC);
+	if (resultado != SQLITE_OK) {
+		cout << "Error uniendo el parametro dni" << endl << sqlite3_errmsg(db)
+				<< endl;
+	}
+
+	resultado = sqlite3_step(stmt);
+	if (resultado == SQLITE_ROW) {
+		if (strcmp(tipo, (char*) "Estudiante") == 0) {
+			cout << "Tipo Estudiante: ";
+		}
+		if (strcmp(tipo, (char*) "Profesor") == 0) {
+			cout << "Tipo Profesor: ";
+		}
+		numUsuarios = sqlite3_column_int(stmt, 0);
+		cout << numUsuarios << endl;
+	}
+
+	resultado = sqlite3_finalize(stmt);
+	if (resultado != SQLITE_OK) {
+		cout << "Error terminando la declaracion (SELECT)" << endl
+				<< sqlite3_errmsg(db) << endl;
+	}
+
+}
+
+//Estadistica 4: Plazas reservadas por cada piso
+void reservasPisos(sqlite3 *db) {
+	int cont1 = 0;
+	int cont2 = 0;
+	int cont3 = 0;
+	int i;
+
+	int tamanyoReserva = cuentaReservas(db);
+	int *reservas = new int[tamanyoReserva];
+	recogeReservas(reservas, db, tamanyoReserva);
+
+	for (i = 0; i < tamanyoReserva; ++i) {
+		if (reservas[i] >= 0 && reservas[i] <= 36) {
+			cont1++;
+		} else if (reservas[i] >= 37 && reservas[i] <= 72) {
+			cont2++;
+		} else {
+			cont3++;
+		}
+	}
+
+	cout << "Plazas reservadas en el Piso 1: " << cont1 << endl;
+	cout << "Plazas reservadas en el Piso 2: " << cont2 << endl;
+	cout << "Plazas reservadas en el Piso 3: " << cont3 << endl;
+	delete[] reservas;
 }

@@ -1,9 +1,3 @@
-/*
- * persona.h
- *
- *  Created on: 1 jun. 2021
- *      Author: Tyler de Mier
- */
 
 #ifndef PERSONA_PERSONA_H_
 #define PERSONA_PERSONA_H_

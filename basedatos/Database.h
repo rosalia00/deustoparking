@@ -1,13 +1,7 @@
-#include "Sqlite3.h"
-#include <iostream>
-#include "Sqlite3.h"
 #include "../persona/Usuario.h"
 #include "../persona/Administrador.h"
 #include "../reserva/Reserva.h"
-#include <stdio.h>
-#include <string.h>
-#include <string>
-using namespace std;
+#include "Sqlite3.h"
 
 #ifndef BASEDATOS_DATABASE_H_
 #define BASEDATOS_DATABASE_H_
@@ -22,4 +16,12 @@ int inicioSesion(sqlite3 *db, char *dni, Usuario *usuario);
 int inicioSesionAdmin(sqlite3 *db, char *dni, Administrador *admin);
 void printReservas(sqlite3 *db, Usuario *u);
 
+//Estadisticas
+void bonosNum(sqlite3 *db, int idBonos);
+void horasEntrada(sqlite3 *db, int hora1, int hora2);
+void tipoUsuario(sqlite3 *db, char* tipo);
+void reservasPisos(sqlite3 *db);
+
+
 #endif /* BASEDATOS_DATABASE_H_ */
+

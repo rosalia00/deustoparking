@@ -1,4 +1,9 @@
 #include "Inicio.h"
+#include "persona/Usuario.h"
+#include "expAdmin/LoginAdmin.h"
+#include <windows.h>
+#include <stdio.h>
+#include <ctype.h>
 
 void admin(sqlite3 *db, char *tipo) {
 	char *tipoNuevo;

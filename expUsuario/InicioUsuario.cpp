@@ -1,5 +1,13 @@
 #include "InicioUsuario.h"
-
+#include <iostream>
+extern "C" {
+#include "../basedatos/Sqlite3.h"
+}
+#include "../basedatos/Database.h"
+#include "../persona/Usuario.h"
+#include "../reserva/Reservar.h"
+#include "Mapa.h"
+using namespace std;
 
 void inicioUsuario(Usuario *u, sqlite3 *db) {
 

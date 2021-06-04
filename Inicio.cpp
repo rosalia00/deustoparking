@@ -1,4 +1,12 @@
 #include "Inicio.h"
+#include "persona/Usuario.h"
+#include "expUsuario/InicioUsuario.h"
+#include "expUsuario/Login.h"
+
+#include "expUsuario/Registrar.h"
+#include <windows.h>
+#include <stdio.h>
+#include <ctype.h>
 
 void inicio(sqlite3 *db, char *tipo) {
 	char *tipoNuevo;
@@ -6,7 +14,7 @@ void inicio(sqlite3 *db, char *tipo) {
 
 	cout << "--- BIENVENIDO A DEUSTO PARKING ---" << endl;
 	cout << "1. Registrarse." << endl << "2. Iniciar sesion." << endl
-			<< "3. Cambiar a Administrador" << endl
+			<< "3. Cambiar a Administrador." << endl
 			<< "4. Salir del programa." << endl;
 
 		do {

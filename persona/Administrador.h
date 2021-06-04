@@ -1,9 +1,3 @@
-/*
- * administrador.h
- *
- *  Created on: 1 jun. 2021
- *      Author: Tyler de Mier
- */
 
 #ifndef PERSONA_ADMINISTRADOR_H_
 #define PERSONA_ADMINISTRADOR_H_
