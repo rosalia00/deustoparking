@@ -1,4 +1,3 @@
-
 #include <iostream>
 extern "C" {
 #include "../basedatos/Sqlite3.h"
@@ -10,7 +9,6 @@ extern "C" {
 #include "InicioUsuario.h"
 #include "Mapa.h"
 using namespace std;
-
 
 bool checkReserva(int plaza, sqlite3 *db) {
 	bool esCierto = false;
@@ -30,7 +28,7 @@ bool checkReserva(int plaza, sqlite3 *db) {
 }
 
 void printMapa(int piso, sqlite3 *db) {
-	vector < string > map;
+	vector<string> map;
 
 	map.push_back("  ===============================");
 	map.push_back("// [ ][ ][ ][ ][ ][ ]");

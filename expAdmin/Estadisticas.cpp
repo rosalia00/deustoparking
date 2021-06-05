@@ -13,10 +13,10 @@ void menuEstadisticas(sqlite3 *db, Administrador *a) {
 	int opcion1;
 	int hora1;
 	int hora2;
-	char *tipo1=(char*)"Estudiante";
-	char *tipo2=(char*)"Profesor";
+	char *tipo1 = (char*) "Estudiante";
+	char *tipo2 = (char*) "Profesor";
 
-	cout << "---Bienvenido al menu de Estadisticas---" << endl;
+	cout << endl << "MENU DE ESTADISTICAS" << endl;
 	cout << "1. Cantidad de bonos reservados de cada tipo. " << endl;
 	cout << "2. Horas más concurridas. " << endl;
 	cout << "3. Número de cada tipo de usuarios. " << endl;
@@ -35,7 +35,7 @@ void menuEstadisticas(sqlite3 *db, Administrador *a) {
 		bonosNum(db, 3);
 		break;
 	case 2:
-		cout << "Indique el intervalo de horas que desea ver: " << endl;
+		cout << endl << "Indique el intervalo de horas que desea ver: " << endl;
 		cout << "- Primera hora: ";
 		cin >> hora1;
 		cout << "- Segunda hora: ";
@@ -56,8 +56,8 @@ void menuEstadisticas(sqlite3 *db, Administrador *a) {
 		break;
 	}
 
-	cout << "1. Volver al menu principal de Administrador. " << endl;
-	cout << "2. Volver al menu de Estadísticas. " << endl << endl;
+	cout << endl << "1. Volver al menu principal de administrador. " << endl;
+	cout << "2. Volver al menu de estadísticas. " << endl;
 	do {
 		cout << "Seleccione la opción: ";
 		cin >> opcion1;

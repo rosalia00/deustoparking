@@ -1,4 +1,3 @@
-
 #include <iostream>
 extern "C" {
 #include "../basedatos/Sqlite3.h"
@@ -17,33 +16,33 @@ void registrarse(sqlite3 *db) {
 	char *nombre = new char[25];
 	char *apellido = new char[50];
 	int telefono;
-	int tarjeta;
+	unsigned long int tarjeta;
 	char *contrasenya = new char[20];
 	char *matricula = new char[8];
 
-	cout << endl << "--- --- REGISTRARSE --- ---";
+	cout << endl << "--- REGISTRARSE ---";
 
 	cout << endl << "DNI: ";
 	cin >> dni;
 	u->setdni(dni);
 
-	cout << endl << "Nombre: ";
+	cout << "Nombre: ";
 	cin >> nombre;
 	u->setNombre(nombre);
 
-	cout << endl << "Apellido: ";
+	cout << "Apellido: ";
 	cin >> apellido;
 	u->setApellido(apellido);
 
-	cout << endl << "Numero de Telefono: ";
+	cout << "Numero de Telefono: ";
 	cin >> telefono;
 	u->setTelefono(telefono);
 
-	cout << endl << "Numero de Tarjeta: ";
+	cout << "Numero de Tarjeta: ";
 	cin >> tarjeta;
 	u->setTarjeta(tarjeta);
 
-	cout << endl << "Contrasenya: ";
+	cout << "Contrasenya: ";
 	cin >> contrasenya;
 	u->setContrasenya(contrasenya);
 
@@ -57,11 +56,11 @@ void registrarse(sqlite3 *db) {
 	char *tipoString = new char[11];
 	switch (opcion) {
 	case 1:
-		tipoString = (char*)"Estudiante";
+		tipoString = (char*) "Estudiante";
 		u->setTipo(tipoString);
 		break;
 	case 2:
-		tipoString = (char*)"Profesor";
+		tipoString = (char*) "Profesor";
 		u->setTipo(tipoString);
 		break;
 	}
@@ -73,7 +72,5 @@ void registrarse(sqlite3 *db) {
 	baseDatosUsuarioRegistrar(db, u);
 	inicioUsuario(u, db);
 
-	cout << endl << "USUARIO REGISTRADO" << endl
-			<< "--- --- ----------- --- ---" << endl;
 }
 

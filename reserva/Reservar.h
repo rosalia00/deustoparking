@@ -1,10 +1,3 @@
-/*
- * Reservar.h
- *
- *  Created on: 1 jun. 2021
- *      Author: Tyler de Mier
- */
-
 #ifndef RESERVA_RESERVAR_H_
 #define RESERVA_RESERVAR_H_
 

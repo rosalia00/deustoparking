@@ -1,4 +1,3 @@
-
 #include <iostream>
 extern "C" {
 #include "../basedatos/Sqlite3.h"
@@ -15,14 +14,16 @@ void administrarInicio(sqlite3 *db, Administrador *a) {
 	float precio;
 	int eleccion;
 	string nombre;
-	cout << "--- ADMINISTRAR BONOS ---" << endl << endl << "Tipo de bono:"
+	char *tecla = new char(2);
+
+	cout << endl << "ADMINISTRAR BONOS" << endl << endl << "Tipo de bono:"
 			<< endl << "1. Semanal" << endl << "2. Mensual" << endl
 			<< "3. Trimestral" << endl << "4. Anual" << endl << endl
 			<< "5. Volver" << endl;
 	do {
-		cout << "Seleccione el bono a cambiar: ";
+		cout << endl << "Seleccione el bono a cambiar: ";
 		cin >> opcion;
-	} while (opcion < 1 || opcion > 4);
+	} while (opcion < 1 || opcion > 5);
 
 	switch (opcion) {
 	case 1:
@@ -60,10 +61,14 @@ void administrarInicio(sqlite3 *db, Administrador *a) {
 	switch (eleccion) {
 	case 1:
 		administrarBono(db, precio, opcion);
-		cout << endl << "Volviendo a la pantalla de inicio...";
+		cout << endl
+				<< "Datos cambiados, presione cualquier tecla para continuar: ";
+		cin >> tecla;
+		inicioAdmin(a, db);
 		break;
 	case 2:
 		cout << endl << "Volviendo a la pantalla de inicio...";
+		inicioAdmin(a, db);
 		break;
 	default:
 		break;

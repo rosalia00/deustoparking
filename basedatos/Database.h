@@ -19,9 +19,8 @@ void printReservas(sqlite3 *db, Usuario *u);
 //Estadisticas
 void bonosNum(sqlite3 *db, int idBonos);
 void horasEntrada(sqlite3 *db, int hora1, int hora2);
-void tipoUsuario(sqlite3 *db, char* tipo);
+void tipoUsuario(sqlite3 *db, char *tipo);
 void reservasPisos(sqlite3 *db);
-
 
 #endif /* BASEDATOS_DATABASE_H_ */
 

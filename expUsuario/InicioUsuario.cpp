@@ -1,5 +1,5 @@
-#include "InicioUsuario.h"
 #include <iostream>
+#include "InicioUsuario.h"
 extern "C" {
 #include "../basedatos/Sqlite3.h"
 }
@@ -7,6 +7,7 @@ extern "C" {
 #include "../persona/Usuario.h"
 #include "../reserva/Reservar.h"
 #include "Mapa.h"
+#include <windows.h>
 using namespace std;
 
 void inicioUsuario(Usuario *u, sqlite3 *db) {
@@ -16,7 +17,7 @@ void inicioUsuario(Usuario *u, sqlite3 *db) {
 
 	cout << endl << "--- BIENVENIDO " << u->getNombre() << " ---" << endl;
 	cout << "1. Reservar plazas." << endl << "2. Mapa." << endl
-			<< "3. Reservas." << endl << "4. Salir." << endl;
+			<< "3. Reservas." << endl << endl << "4. Salir." << endl;
 
 	do {
 		cout << "Elija la opción: ";
@@ -39,7 +40,9 @@ void inicioUsuario(Usuario *u, sqlite3 *db) {
 		inicioUsuario(u, db);
 		break;
 	case 4:
-		cout << "Saliendo del programa...";
+		cout << endl << "Saliendo del programa..." << endl;
+		Sleep(1000);
+		cout << "¡GRACIAS POR USAR DEUSTO PARKING!";
 		exit(1);
 		break;
 	default:

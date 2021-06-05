@@ -9,9 +9,9 @@ void admin(sqlite3 *db, char *tipo) {
 	char *tipoNuevo;
 	int opcion;
 
-	cout << "--- BIENVENIDO A DEUSTO PARKING ---" << endl;
-	cout << "1. Iniciar sesion." << endl << "2. Cambiar a Usuario"
-			<< endl << "3. Salir del programa." << endl;
+	cout << endl << "--- BIENVENIDO A DEUSTO PARKING ---" << endl;
+	cout << "1. Iniciar sesion." << endl << "2. Cambiar a usuario" << endl
+			<< "3. Salir del programa." << endl;
 	do {
 		cout << "Elija la opción: ";
 		cin >> opcion;
@@ -19,6 +19,7 @@ void admin(sqlite3 *db, char *tipo) {
 
 	switch (opcion) {
 	case 1:
+		cout << endl;
 		loggearseAdmin(db);
 		break;
 	case 2:
@@ -26,8 +27,9 @@ void admin(sqlite3 *db, char *tipo) {
 		inicio(db, tipoNuevo);
 		break;
 	case 3:
-		cout << "Saliendo del programa...";
-		Sleep(3000);
+		cout << endl << "Saliendo del programa..." << endl;
+		Sleep(1000);
+		cout << "¡GRACIAS POR USAR DEUSTO PARKING!";
 		exit(1);
 		break;
 

@@ -1,10 +1,3 @@
-/*
- * Ticket.h
- *
- *  Created on: 1 jun. 2021
- *      Author: Tyler de Mier
- */
-
 #ifndef RESERVA_TICKET_H_
 #define RESERVA_TICKET_H_
 

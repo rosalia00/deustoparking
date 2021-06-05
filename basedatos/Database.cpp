@@ -1,6 +1,5 @@
-#include "Database.h"
-
 #include <iostream>
+#include "Database.h"
 extern "C" {
 #include "Sqlite3.h"
 }

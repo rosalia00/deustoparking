@@ -1,10 +1,3 @@
-/*
- * Reserva.cpp
- *
- *  Created on: 3 jun. 2021
- *      Author: Tyler de Mier
- */
-
 #include <iostream>
 #include "Reserva.h"
 using namespace std;

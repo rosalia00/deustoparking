@@ -4,9 +4,6 @@
 #include "../basedatos/Sqlite3.h"
 #include "../basedatos/Database.h"
 
-void menuEstadisticas(sqlite3 *db, Administrador* a);
-
-
-
+void menuEstadisticas(sqlite3 *db, Administrador *a);
 
 #endif /* EXPADMIN_ESTADISTICAS_H_ */

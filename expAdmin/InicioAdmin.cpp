@@ -7,6 +7,7 @@ extern "C" {
 #include "../persona/Administrador.h"
 #include "Estadisticas.h"
 #include "Administrar.h"
+#include <windows.h>
 using namespace std;
 
 void inicioAdmin(Administrador *a, sqlite3 *db) {
@@ -19,7 +20,7 @@ void inicioAdmin(Administrador *a, sqlite3 *db) {
 	do {
 		cout << "Elija la opción: ";
 		cin >> opcion;
-	} while (opcion < 1 || opcion > 4);
+	} while (opcion < 1 || opcion > 3);
 
 	switch (opcion) {
 	case 1:
@@ -29,7 +30,9 @@ void inicioAdmin(Administrador *a, sqlite3 *db) {
 		menuEstadisticas(db, a);
 		break;
 	case 3:
-		cout << "Saliendo del programa...";
+		cout << endl << "Saliendo del programa..." << endl;
+		Sleep(1000);
+		cout << "¡GRACIAS POR USAR DEUSTO PARKING!";
 		exit(1);
 		break;
 	default:
